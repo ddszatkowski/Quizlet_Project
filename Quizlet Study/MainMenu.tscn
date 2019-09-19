@@ -62,8 +62,7 @@ margin_right = 1296.0
 margin_bottom = 216.0
 rect_pivot_offset = Vector2( 1.0787, -6.72784 )
 hint_tooltip = "Click Here"
-mouse_filter = 0
-mouse_default_cursor_shape = 5
+mouse_default_cursor_shape = 2
 texture = ExtResource( 2 )
 
 [node name="Options" type="TextureRect" parent="MainMenu/VBoxContainer/HBoxContainer/VBoxContainer/MenuOptions"]
