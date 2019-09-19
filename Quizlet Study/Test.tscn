@@ -9,6 +9,7 @@ script = ExtResource( 1 )
 margin_left = 48.0
 margin_right = 309.0
 margin_bottom = 39.0
+rect_pivot_offset = Vector2( 183, 14 )
 text = "Print Set"
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
