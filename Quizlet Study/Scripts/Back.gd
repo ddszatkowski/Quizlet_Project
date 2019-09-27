@@ -1,4 +1,4 @@
-extends Button
+extends TextureButton
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -13,3 +13,6 @@ func _ready():
 #	pass
 
 
+func _on_Back_pressed():
+	get_tree().change_scene("res://Scenes/MainMenu.tscn")
+	pass # Replace with function body.
