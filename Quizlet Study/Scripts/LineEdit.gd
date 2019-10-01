@@ -20,21 +20,28 @@ func _on_Import_pressed():
 
 
 func _on_HTTPRequest_request_completed( result, response_code, headers, body ):
-    var html = body.get_string_from_utf8()
-    var index = 0
-    var wordStrs = []
-    var defStrs = []
-    while index != -1:
-        index = html.findn('"word"', index)
-        var wordStr = html.substr(index+8, 40)
-        wordStr = wordStr.left(wordStr.find('"'))
-        index = html.findn('"definition"', index)
-        var defStr = html.substr(index + 14, 100)
-        defStr = defStr.left(defStr.find('"'))
-        if defStr != "":
-            wordStrs.append(wordStr)
-            defStrs.append(defStr)
-    wordStrs.pop_back()
-    defStrs.pop_back()
-    print(wordStrs)
-    print(defStrs)
+	var html = body.get_string_from_utf8()
+	var save_game = File.new()
+	var save_dict = {}
+	if(save_game.file_exists("res://savegame.json")):
+		save_game.open("res://savegame.json", File.READ)
+		save_dict = parse_json(save_game.get_as_text())
+		save_game.close()
+	var index = 0
+	var set_dict = {}
+	while index != -1:
+		index = html.findn('"word"', index)
+		var wordStr = html.substr(index+8, 200)
+		wordStr = wordStr.left(wordStr.find('"'))
+		index = html.findn('"definition"', index)
+		var defStr = html.substr(index + 14, 200)
+		defStr = defStr.left(defStr.find('"'))
+		if defStr != "" and defStr.findn("html lang") == -1:
+			set_dict[wordStr] = defStr
+	
+	save_dict[text] = set_dict
+
+	save_game.open("res://savegame.json", File.WRITE)
+	save_game.store_line(to_json(save_dict))
+	save_game.close()
+	print("Game Saved!")
