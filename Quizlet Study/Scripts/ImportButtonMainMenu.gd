@@ -12,7 +12,6 @@ func _ready():
 #func _process(delta):
 #	pass
 
-
-func _on_Play_pressed():
+func _on_Import_pressed():
 	get_tree().change_scene("res://Scenes/ImportMenu.tscn")
 	pass # Replace with function body.
