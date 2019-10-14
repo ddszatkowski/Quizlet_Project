@@ -12,8 +12,7 @@ func _ready():
 #func _process(delta):
 #	pass
 
-
-func _on_Play_pressed():
+func _on_PlayMainMenu_pressed():
 	var save_game = File.new()
 	var save_dict = {}
 	if(save_game.file_exists("res://savegame.json")):

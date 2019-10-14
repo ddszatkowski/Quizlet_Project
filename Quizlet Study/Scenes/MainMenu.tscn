@@ -123,7 +123,7 @@ margin_bottom = 1490.0
 rect_pivot_offset = Vector2( 1.0787, -5.23572 )
 texture = ExtResource( 11 )
 stretch_mode = 5
-[connection signal="pressed" from="MainMenu/VBoxContainer/HBoxContainer/VBoxContainer/MenuOptions/Play" to="MainMenu/VBoxContainer/HBoxContainer/VBoxContainer/MenuOptions/Play" method="_on_Play_pressed"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/HBoxContainer/VBoxContainer/MenuOptions/Play" to="MainMenu/VBoxContainer/HBoxContainer/VBoxContainer/MenuOptions/Play" method="_on_PlayMainMenu_pressed"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/HBoxContainer/VBoxContainer/MenuOptions/Import" to="MainMenu/VBoxContainer/HBoxContainer/VBoxContainer/MenuOptions/Import" method="_on_Import_pressed"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/HBoxContainer/VBoxContainer/MenuOptions/Options" to="MainMenu/VBoxContainer/HBoxContainer/VBoxContainer/MenuOptions/Options" method="_on_Options_pressed"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/HBoxContainer/VBoxContainer/MenuOptions/Quit" to="MainMenu/VBoxContainer/HBoxContainer/VBoxContainer/MenuOptions/Quit" method="_on_Quit_pressed"]
