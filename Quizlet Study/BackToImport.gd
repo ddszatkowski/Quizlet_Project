@@ -1,4 +1,4 @@
-extends TextureButton
+extends Node
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -11,8 +11,3 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
-
-
-func _on_Back_pressed():
-	get_tree().quit()
-	pass # Replace with function body.

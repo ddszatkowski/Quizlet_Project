@@ -13,6 +13,6 @@ func _ready():
 #	pass
 
 
-func _on_Back_pressed():
-	get_tree().quit()
+func _on_Return_pressed():
+	get_tree().change_scene("res://Scenes/ImportMenu.tscn")
 	pass # Replace with function body.
