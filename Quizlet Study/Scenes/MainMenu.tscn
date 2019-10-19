@@ -8,9 +8,10 @@
 [ext_resource path="res://Sprites/options.png" type="Texture" id=6]
 [ext_resource path="res://Scripts/OptionsButtonMainMenu.gd" type="Script" id=7]
 [ext_resource path="res://Sprites/quit.png" type="Texture" id=8]
-[ext_resource path="res://Scenes/Quit.gd" type="Script" id=9]
+[ext_resource path="res://Scripts/Quit.gd" type="Script" id=9]
 [ext_resource path="res://Sprites/rocket_image.png" type="Texture" id=10]
 [ext_resource path="res://Sprites/Authors.png" type="Texture" id=11]
+
 
 [node name="Node2D" type="Node2D"]
 position = Vector2( 2.68018, -2.23506 )
