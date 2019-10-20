@@ -12,7 +12,6 @@
 [ext_resource path="res://Sprites/rocket_image.png" type="Texture" id=10]
 [ext_resource path="res://Sprites/Authors.png" type="Texture" id=11]
 
-
 [node name="Node2D" type="Node2D"]
 position = Vector2( 2.68018, -2.23506 )
 scale = Vector2( 0.43, 0.37 )
