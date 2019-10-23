@@ -1,21 +1,20 @@
 extends TextureButton
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-# warning-ignore:unused_class_variable
+# Retrieve List and global variables
 onready var itemList = get_node("/root/Node2D/CardSetList")
+onready var global = get_node("/root/global")
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+# Define list of card set names
+var nameList = []
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
+# When play button is clicked, save set names in global
 func _on_PlaySelectScreen_pressed():
-	print ("Selected card decks by index in JSON file: ")
-	print (itemList.get_selected_items())
+	# For each selected index, save corresponding name
+	for item in itemList.get_selected_items():
+		nameList.append(itemList.get_item_text(item))
+
+	# Import set into global
+	global.importCards(nameList)
+	
+	# Start game
 	get_tree().change_scene("res://Scenes/Game.tscn")
-	pass # Replace with function body.

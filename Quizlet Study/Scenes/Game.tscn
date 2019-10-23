@@ -1,65 +1,157 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=22 format=2]
 
-[ext_resource path="res://Scripts/Enemy.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/enemy_basic_f.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/enemy_basic_charging_2.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/enemy_basic_l.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/enemy_basic_charging_1.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/enemy_basic_charging_3.png" type="Texture" id=6]
-[ext_resource path="res://Scenes/Laser.gd" type="Script" id=7]
-[ext_resource path="res://Sprites/red_laser.png" type="Texture" id=8]
+[ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/space.jpg" type="Texture" id=2]
+[ext_resource path="res://Sprites/base_frame.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/button_deactivated.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/button_on_1.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/button_off_1.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/button_on_2.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/button_off_2.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/button_on_3.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/button_off_3.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/button_on_4.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/button_off_4.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/message_screen.png" type="Texture" id=13]
+[ext_resource path="res://data-latin.ttf" type="DynamicFontData" id=14]
+[ext_resource path="res://Scripts/Question.gd" type="Script" id=15]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 2 ) ],
-"loop": true,
-"name": "Charge0",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 3 ) ],
-"loop": true,
-"name": "Charge2",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 4 ) ],
 "loop": true,
-"name": "Dodging",
+"name": "Inactive",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 5 ) ],
 "loop": true,
-"name": "Charge1",
+"name": "On",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 6 ) ],
 "loop": true,
-"name": "Charge3",
+"name": "Off",
 "speed": 5.0
 } ]
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "Inactive",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "On",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ) ],
+"loop": true,
+"name": "Off",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "Inactive",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ) ],
+"loop": true,
+"name": "On",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ) ],
+"loop": true,
+"name": "Off",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "Inactive",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 11 ) ],
+"loop": true,
+"name": "On",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 12 ) ],
+"loop": true,
+"name": "Off",
+"speed": 5.0
+} ]
+
+[sub_resource type="DynamicFont" id=5]
+size = 75
+extra_spacing_top = 20
+font_data = ExtResource( 14 )
+
+[sub_resource type="Theme" id=6]
+default_font = SubResource( 5 )
+
+[node name="Game" type="Node2D"]
 position = Vector2( -7.58966, 7.58954 )
 scale = Vector2( 0.771989, 0.72411 )
-
-[node name="Enemy" type="Node2D" parent="."]
-position = Vector2( 264.172, 152.959 )
 script = ExtResource( 1 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="Enemy"]
+[node name="SpaceBackground" type="TextureRect" parent="."]
+margin_left = 17.3983
+margin_top = 143.01
+margin_right = 1697.4
+margin_bottom = 1193.01
+rect_scale = Vector2( 1.41093, 1.13653 )
+mouse_filter = 2
+texture = ExtResource( 2 )
+
+[node name="BaseFrame" type="TextureRect" parent="."]
+margin_left = -72.4908
+margin_top = -16.1501
+margin_right = 1676.51
+margin_bottom = 829.85
+rect_scale = Vector2( 1.52222, 1.77895 )
+mouse_filter = 2
+texture = ExtResource( 3 )
+
+[node name="Button1" type="AnimatedSprite" parent="."]
+position = Vector2( 392.495, 1319.8 )
 frames = SubResource( 1 )
-animation = "Charge3"
+animation = "Off"
 
-[node name="Laser1" type="RigidBody2D" parent="Enemy"]
-position = Vector2( 0, -2.74858 )
-script = ExtResource( 7 )
+[node name="Button2" type="AnimatedSprite" parent="."]
+position = Vector2( 936.39, 1316.82 )
+frames = SubResource( 2 )
+animation = "Off"
 
-[node name="Laser_spr" type="Sprite" parent="Enemy/Laser1"]
-scale = Vector2( 1, 1 )
-texture = ExtResource( 8 )
+[node name="Button3" type="AnimatedSprite" parent="."]
+position = Vector2( 1590.38, 1316.82 )
+frames = SubResource( 3 )
+animation = "Off"
 
-[node name="Laser2" type="RigidBody2D" parent="Enemy"]
-script = ExtResource( 7 )
+[node name="Button4" type="AnimatedSprite" parent="."]
+position = Vector2( 2105.04, 1322.1 )
+frames = SubResource( 4 )
+animation = "Off"
 
-[node name="Laser_spr" type="Sprite" parent="Enemy/Laser2"]
-scale = Vector2( 1, 1 )
-texture = ExtResource( 8 )
+[node name="QuestionScreen" type="TextureRect" parent="."]
+margin_left = 466.13
+margin_top = 30.8186
+margin_right = 1966.13
+margin_bottom = 312.819
+rect_scale = Vector2( 1.32567, 1.26249 )
+mouse_filter = 2
+texture = ExtResource( 13 )
+
+[node name="Question" type="Label" parent="QuestionScreen"]
+margin_left = 108.727
+margin_top = 74.3823
+margin_right = 1058.73
+margin_bottom = 224.382
+theme = SubResource( 6 )
+script = ExtResource( 15 )

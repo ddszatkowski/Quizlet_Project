@@ -1,9 +1,8 @@
 extends Node2D
 
-# Declare member variables here. Examples:
 onready var itemList = get_node("CardSetList")
 
-# Called when the node enters the scene tree for the first time.
+# List out saved sets in selector
 func _ready():
 	var save_game = File.new()
 	var save_dict = {}
@@ -13,7 +12,3 @@ func _ready():
 	itemList.clear()
 	for i in save_dict.keys():
 		 itemList.add_item(i)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass

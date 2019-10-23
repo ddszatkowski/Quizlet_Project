@@ -20,25 +20,45 @@ func fire(startPos, endPos, goingForward):
 	end = endPos
 	forward = goingForward
 	
-	scaleVar = Vector2(1,1)
+	# Set laser starting size depending on direction
+	if forward:
+		scaleVar = Vector2(1,1)
+	else:
+		scaleVar = Vector2(8,8)
+	
+	# Angle laser towards destination
 	angle = positionVar.angle_to_point(endPos)
 	$Laser_spr.rotation = angle
 	
+	# Stop hiding laser
 	show()
 	shown = true
 
 func _process(delta):
+	# Set position and scale to variable values (Fixes strange bug)
 	position = positionVar
 	scale = scaleVar
+	
+	# If laser is hidden, end here
 	if not shown:
 		return
+	
+	# Set velocity in destination direction
 	var velocity = positionVar.direction_to(end) * delta * 1500
 	positionVar.y += velocity.y
 	positionVar.x += velocity.x
+	
+	# Grow or shrink laser based on direction, hide at point
 	if forward:
 		scaleVar.x += 8 * delta
 		scaleVar.y = scaleVar.x
 		if scale.x > 8:
+			hide()
+			shown = false
+	else:
+		scaleVar.x -= 8 * delta
+		scaleVar.y = scaleVar.x
+		if scale.x < .5:
 			hide()
 			shown = false
 	
