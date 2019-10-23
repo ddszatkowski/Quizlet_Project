@@ -30,10 +30,10 @@ position = Vector2( -8.53966, 7.58954 )
 scale = Vector2( 0.771989, 0.72411 )
 
 [node name="Back" type="TextureButton" parent="."]
-margin_left = 406.571
-margin_top = 548.437
-margin_right = 909.571
-margin_bottom = 713.437
+margin_left = 394.484
+margin_top = 545.216
+margin_right = 897.484
+margin_bottom = 710.216
 texture_normal = ExtResource( 1 )
 texture_pressed = ExtResource( 1 )
 texture_hover = ExtResource( 1 )

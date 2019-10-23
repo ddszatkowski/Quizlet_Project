@@ -5,19 +5,43 @@ onready var enemy = preload("res://Scenes/Enemy.tscn")
 onready var select = preload("res://Scenes/SelectMenu.tscn")
 # Get global variables, such as selected card set names
 onready var global = get_node("/root/global")
+# This is the shield bar we need to change for health being lost
+onready var bar = $TextureProgress
 # List of spawned enemies
 var enemies = []
 # All selected card sets, merged
 var card_dict
+
+#health
+var health
 
 func _ready():
 	# Spawn an enemy per card in set
 	card_dict = global.cardSet
 	for question in card_dict:
 		add_enemy(question)
+	var player_max_health = 100
+	bar.max_value = player_max_health
+	bar.value = player_max_health
 	
 # Declare new enemy, call initialization and add to this node as child
 func add_enemy(question):
 	var temp = enemy.instance()
 	enemies = temp.init(enemies, question)
 	add_child(temp)
+
+func _on_hit_health_changed(health):
+	take_damage(20)
+	update_health(health)
+	
+func update_health(new_value):
+	bar.value = new_value
+
+func take_damage(count):
+	health -= count
+	if health <= 0:
+		health = 0
+		get_tree().change_scene("res://Scenes/GameOver.tscn")
+
+	bar.value = health
+	
