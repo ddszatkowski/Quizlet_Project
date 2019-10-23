@@ -9,6 +9,9 @@ var charTime = .1
 # Counter for when to add letters
 var changeTime = 0
 var font
+var correctAnswer
+
+var numberTimesAnswered = 0
 
 # Set starting font to large
 func _ready():
@@ -31,3 +34,10 @@ func changeMessage(msg):
 
 func _on_Enemy_selected():
 	changeMessage("Damn, not working")
+
+func _answered(answer):
+	if(answer == correctAnswer):
+		on_answer_correctly()
+		
+func on_answer_correctly():
+	numberTimesAnswered += 1
