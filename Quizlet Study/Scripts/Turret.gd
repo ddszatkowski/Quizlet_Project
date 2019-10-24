@@ -1,9 +1,9 @@
 extends Sprite
 
-var shoot
+#var shoot
 var Mouse_Position
-export (PackedScene) var laser
-onready var Laser_container = get_node("Laser_container")
+#export (PackedScene) var laser
+#onready var Laser_container = get_node("Laser_container")
 var red_tex = load("res://Sprites/red_turret.png")
 var blue_tex = load("res://Sprites/blue_turret.png")
 var green_tex = load("res://Sprites/green_turret.png")
@@ -14,12 +14,12 @@ func _ready():
 	set_process_input(true)
 	texture = red_tex
 
-func _shoot():
-	look_at(get_global_mouse_position())
-	var pew = laser.instance()
-	Laser_container.add_child(pew)
+#func _shoot():
+#	look_at(get_global_mouse_position())
+#	var pew = laser.instance()
+#	Laser_container.add_child(pew)
 	
-	pew.shoot(get_global_mouse_position(), global_position)
+#	pew.shoot(get_global_mouse_position(), global_position)
 	
 func _process(delta):
 	Mouse_Position = get_local_mouse_position()
