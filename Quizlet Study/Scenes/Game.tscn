@@ -1,99 +1,29 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/space.jpg" type="Texture" id=2]
-[ext_resource path="res://Sprites/base_frame.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/button_deactivated.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/button_off_1.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/button_on_1.png" type="Texture" id=6]
-[ext_resource path="res://Sprites/button_off_2.png" type="Texture" id=7]
-[ext_resource path="res://Sprites/button_on_2.png" type="Texture" id=8]
-[ext_resource path="res://Sprites/button_off_3.png" type="Texture" id=9]
-[ext_resource path="res://Sprites/button_on_3.png" type="Texture" id=10]
-[ext_resource path="res://Sprites/button_off_4.png" type="Texture" id=11]
-[ext_resource path="res://Sprites/button_on_4.png" type="Texture" id=12]
-[ext_resource path="res://Sprites/message_screen.png" type="Texture" id=13]
-[ext_resource path="res://data-latin.ttf" type="DynamicFontData" id=14]
-[ext_resource path="res://Scripts/Question.gd" type="Script" id=15]
-[ext_resource path="res://Sprites/blue_laser.png" type="Texture" id=16]
-[ext_resource path="res://Scripts/Pause.gd" type="Script" id=17]
-
-[sub_resource type="SpriteFrames" id=1]
-animations = [ {
-"frames": [ ExtResource( 4 ) ],
-"loop": true,
-"name": "Inactive",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 5 ) ],
-"loop": true,
-"name": "Off",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 6 ) ],
-"loop": true,
-"name": "On",
-"speed": 5.0
-} ]
-
-[sub_resource type="SpriteFrames" id=2]
-animations = [ {
-"frames": [ ExtResource( 4 ) ],
-"loop": true,
-"name": "Inactive",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 7 ) ],
-"loop": true,
-"name": "Off",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 8 ) ],
-"loop": true,
-"name": "On",
-"speed": 5.0
-} ]
-
-[sub_resource type="SpriteFrames" id=3]
-animations = [ {
-"frames": [ ExtResource( 4 ) ],
-"loop": true,
-"name": "Inactive",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 9 ) ],
-"loop": true,
-"name": "Off",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 10 ) ],
-"loop": true,
-"name": "On",
-"speed": 5.0
-} ]
-
-[sub_resource type="SpriteFrames" id=4]
-animations = [ {
-"frames": [ ExtResource( 4 ) ],
-"loop": true,
-"name": "Inactive",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 11 ) ],
-"loop": true,
-"name": "Off",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 12 ) ],
-"loop": true,
-"name": "On",
-"speed": 5.0
-} ]
+[ext_resource path="res://Sprites/red_turret.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/Turret.gd" type="Script" id=4]
+[ext_resource path="res://Sprites/base_frame.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/button_off_1.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/button_on_1.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/button_deactivated.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/button_off_2.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/button_on_2.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/button_off_3.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/button_on_3.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/button_off_4.png" type="Texture" id=13]
+[ext_resource path="res://Sprites/button_on_4.png" type="Texture" id=14]
+[ext_resource path="res://Sprites/message_screen.png" type="Texture" id=15]
+[ext_resource path="res://data-latin.ttf" type="DynamicFontData" id=16]
+[ext_resource path="res://Scripts/Question.gd" type="Script" id=17]
+[ext_resource path="res://Sprites/blue_laser.png" type="Texture" id=18]
+[ext_resource path="res://Scripts/Pause.gd" type="Script" id=19]
 
 [sub_resource type="DynamicFont" id=5]
 size = 75
 extra_spacing_top = 20
-font_data = ExtResource( 14 )
+font_data = ExtResource( 16 )
 
 [sub_resource type="Theme" id=6]
 default_font = SubResource( 5 )
@@ -116,6 +46,46 @@ rect_scale = Vector2( 1.41093, 1.13653 )
 mouse_filter = 2
 texture = ExtResource( 2 )
 
+[node name="LeftTurret" type="Sprite" parent="."]
+editor/display_folded = true
+position = Vector2( 145.988, 1239.17 )
+rotation = -0.264639
+scale = Vector2( 3.85673, 4.25171 )
+texture = ExtResource( 3 )
+centered = false
+offset = Vector2( -20, -75 )
+flip_h = true
+flip_v = true
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Muzzle" type="Position2D" parent="LeftTurret"]
+position = Vector2( 65.1585, -63.3383 )
+
+[node name="GunTimer" type="Timer" parent="LeftTurret"]
+
+[node name="RightTurret" type="Sprite" parent="."]
+editor/display_folded = true
+position = Vector2( 2342.68, 1249.36 )
+rotation = -1.21531
+scale = Vector2( 3.85673, 4.25171 )
+texture = ExtResource( 3 )
+centered = false
+offset = Vector2( -20, -75 )
+flip_h = true
+flip_v = true
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Muzzle" type="Position2D" parent="RightTurret"]
+position = Vector2( 65.1585, -63.3383 )
+
+[node name="GunTimer" type="Timer" parent="RightTurret"]
+
 [node name="BaseFrame" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -125,27 +95,51 @@ margin_right = 1676.51
 margin_bottom = 829.85
 rect_scale = Vector2( 1.52222, 1.77895 )
 mouse_filter = 2
-texture = ExtResource( 3 )
+texture = ExtResource( 5 )
 
-[node name="Button1" type="AnimatedSprite" parent="."]
-position = Vector2( 392.495, 1319.8 )
-frames = SubResource( 1 )
-animation = "Off"
+[node name="RedButton" type="TextureButton" parent="."]
+margin_left = 260.46
+margin_top = 1192.0
+margin_right = 586.46
+margin_bottom = 1509.0
+toggle_mode = true
+action_mode = 0
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 7 )
+texture_disabled = ExtResource( 8 )
 
-[node name="Button2" type="AnimatedSprite" parent="."]
-position = Vector2( 936.39, 1316.82 )
-frames = SubResource( 2 )
-animation = "Off"
+[node name="BlueButton" type="TextureButton" parent="."]
+margin_left = 832.201
+margin_top = 1137.82
+margin_right = 1158.2
+margin_bottom = 1454.82
+toggle_mode = true
+action_mode = 0
+texture_normal = ExtResource( 9 )
+texture_pressed = ExtResource( 10 )
+texture_disabled = ExtResource( 8 )
 
-[node name="Button3" type="AnimatedSprite" parent="."]
-position = Vector2( 1590.38, 1316.82 )
-frames = SubResource( 3 )
-animation = "Off"
+[node name="GreenButton" type="TextureButton" parent="."]
+margin_left = 1442.06
+margin_top = 1131.05
+margin_right = 1768.06
+margin_bottom = 1448.05
+toggle_mode = true
+action_mode = 0
+texture_normal = ExtResource( 11 )
+texture_pressed = ExtResource( 12 )
+texture_disabled = ExtResource( 8 )
 
-[node name="Button4" type="AnimatedSprite" parent="."]
-position = Vector2( 2105.04, 1322.1 )
-frames = SubResource( 4 )
-animation = "Off"
+[node name="PurpleButton" type="TextureButton" parent="."]
+margin_left = 2032.86
+margin_top = 1171.68
+margin_right = 2358.86
+margin_bottom = 1488.68
+toggle_mode = true
+action_mode = 0
+texture_normal = ExtResource( 13 )
+texture_pressed = ExtResource( 14 )
+texture_disabled = ExtResource( 8 )
 
 [node name="QuestionScreen" type="TextureRect" parent="."]
 margin_left = 466.13
@@ -154,7 +148,7 @@ margin_right = 1966.13
 margin_bottom = 312.819
 rect_scale = Vector2( 1.32567, 1.26249 )
 mouse_filter = 2
-texture = ExtResource( 13 )
+texture = ExtResource( 15 )
 
 [node name="Question" type="Label" parent="QuestionScreen"]
 margin_left = 108.727
@@ -162,7 +156,7 @@ margin_top = 74.3823
 margin_right = 1058.73
 margin_bottom = 224.382
 theme = SubResource( 6 )
-script = ExtResource( 15 )
+script = ExtResource( 17 )
 
 [node name="TextureProgress" type="TextureProgress" parent="."]
 margin_left = -36.0
@@ -171,7 +165,7 @@ margin_right = 100.0
 margin_bottom = 1216.0
 value = 100.0
 texture_under = SubResource( 7 )
-texture_progress = ExtResource( 16 )
+texture_progress = ExtResource( 18 )
 fill_mode = 3
 tint_under = Color( 0.00392157, 0.00392157, 0.0196078, 1 )
 tint_over = Color( 0.133333, 0.152941, 0.470588, 1 )
@@ -190,9 +184,13 @@ margin_left = -67.8048
 margin_top = -3.99622
 margin_right = 2603.2
 margin_bottom = 1513.0
-script = ExtResource( 17 )
+script = ExtResource( 19 )
 
 [node name="PauseOverlay" type="ColorRect" parent="CanvasLayer/Pause"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 0.352941 )
+[connection signal="toggled" from="RedButton" to="." method="_on_RedButton_toggled"]
+[connection signal="toggled" from="BlueButton" to="." method="_on_BlueButton_toggled"]
+[connection signal="toggled" from="GreenButton" to="." method="_on_GreenButton_toggled"]
+[connection signal="toggled" from="PurpleButton" to="." method="_on_PurpleButton_toggled"]
