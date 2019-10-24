@@ -43,7 +43,7 @@ func _ready():
 	
 	var temp = get_parent().get_child(6)
 	temp = temp.get_child(0)
-	temp.connect("selected", self, "_on_Enemy_selected")
+	#temp.connect("selected", self, "_on_Enemy_selected")
 	
 	$Selection.hide()
 

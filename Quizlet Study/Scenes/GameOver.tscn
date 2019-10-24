@@ -27,7 +27,7 @@ func _on_Return_pressed():
 
 [node name="Node2D" type="Node2D"]
 position = Vector2( -8.53966, 7.58954 )
-scale = Vector2( 0.771989, 0.72411 )
+scale = Vector2( 1.462, 1.234 )
 
 [node name="Back" type="TextureButton" parent="."]
 margin_left = 394.484

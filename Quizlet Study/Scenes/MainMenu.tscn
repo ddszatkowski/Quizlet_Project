@@ -14,7 +14,7 @@
 
 [node name="Node2D" type="Node2D"]
 position = Vector2( 2.68018, -2.23506 )
-scale = Vector2( 0.43, 0.37 )
+scale = Vector2( 0.8, 0.66 )
 
 [node name="MainMenu" type="MarginContainer" parent="."]
 anchor_right = 1.0

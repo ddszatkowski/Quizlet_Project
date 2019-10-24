@@ -16,7 +16,7 @@ font_data = SubResource( 1 )
 
 [node name="Node2D" type="Node2D"]
 position = Vector2( -7.58966, 7.58954 )
-scale = Vector2( 0.771989, 0.72411 )
+scale = Vector2( 1.422, 1.294 )
 script = ExtResource( 1 )
 
 [node name="Back" type="TextureButton" parent="."]
