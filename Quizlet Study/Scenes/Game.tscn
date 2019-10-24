@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/space.jpg" type="Texture" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://data-latin.ttf" type="DynamicFontData" id=14]
 [ext_resource path="res://Scripts/Question.gd" type="Script" id=15]
 [ext_resource path="res://Sprites/blue_laser.png" type="Texture" id=16]
+[ext_resource path="res://Scripts/Pause.gd" type="Script" id=17]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -116,6 +117,8 @@ mouse_filter = 2
 texture = ExtResource( 2 )
 
 [node name="BaseFrame" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
 margin_left = -72.4908
 margin_top = -16.1501
 margin_right = 1676.51
@@ -174,3 +177,22 @@ tint_under = Color( 0.00392157, 0.00392157, 0.0196078, 1 )
 tint_over = Color( 0.133333, 0.152941, 0.470588, 1 )
 tint_progress = Color( 0.133333, 0.121569, 0.537255, 1 )
 nine_patch_stretch = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+pause_mode = 2
+layer = 100
+
+[node name="Pause" type="Control" parent="CanvasLayer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -67.8048
+margin_top = -3.99622
+margin_right = 2603.2
+margin_bottom = 1513.0
+script = ExtResource( 17 )
+
+[node name="PauseOverlay" type="ColorRect" parent="CanvasLayer/Pause"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.352941 )
