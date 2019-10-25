@@ -13,10 +13,12 @@ var correctAnswer
 
 var numberTimesAnswered = 0
 
+
 # Set starting font to large
 func _ready():
 	font = get_font("")
 	font.size = 75
+	text = totalMsg
 	
 # Add letter if passed time larger than charTime and letters are left
 func _process(delta):
@@ -32,8 +34,8 @@ func changeMessage(msg):
 	totalMsg = msg
 	currMsg = ""
 
-func _on_Enemy_selected():
-	changeMessage("Damn, not working")
+#func _on_Enemy_selected():
+#	changeMessage("Damn, not working")
 
 func _answered(answer):
 	if(answer == correctAnswer):

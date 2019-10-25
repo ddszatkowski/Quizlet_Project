@@ -1,5 +1,7 @@
 extends RigidBody2D
 
+onready var question_display = get_tree().get_root().get_node("Game/QuestionScreen/Question")
+
 var velocity = Vector2()
 
 # Bounds of Movement
@@ -123,10 +125,13 @@ func shootLaser():
 	$Laser2.fire(Vector2(30, 20), Vector2(x_max, 2*y_max), true)
 
 # If enemy is clicked on, send selected signal to all other enemies and screen
+# Updates question to the one attached
 func _on_Enemy_input_event(viewport, event, shape_idx):
 	if Input.is_action_pressed("Click"):
 		emit_signal("selected")
 		$Selection.show()
+		# Update display to show question
+		question_display.changeMessage(question)
 
 # If received selected signal from another enemy, hide selection cursor
 func _on_Enemy_selected():
