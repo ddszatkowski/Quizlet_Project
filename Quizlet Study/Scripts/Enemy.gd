@@ -1,6 +1,10 @@
 extends RigidBody2D
 
 onready var question_display = get_tree().get_root().get_node("Game/QuestionScreen/Question")
+onready var red_button_display = get_tree().get_root().get_node("Game/RedButtonLabel")
+onready var blue_button_display = get_tree().get_root().get_node("Game/BlueButtonLabel")
+onready var green_button_display = get_tree().get_root().get_node("Game/GreenButtonLabel")
+onready var purple_button_display = get_tree().get_root().get_node("Game/PurpleButtonLabel")
 
 var velocity = Vector2()
 
@@ -14,6 +18,8 @@ var target_pos
 var top_speed = 5
 var scaleVar = Vector2(.2,.2)
 var question
+var answers_array
+var correct_answer_index
 signal selected(id)
 
 # Time increments within shoot_wait at which animation changes
@@ -25,8 +31,10 @@ var shoot_wait_max = 10
 
 # Should be called when enemy is spawned. 
 # Stores question and connects signals to all other enemies
-func init(enemies, q):
+func init(enemies, q, a, a_id):
 	question = q
+	answers_array = a
+	correct_answer_index = a_id
 	for enemy in enemies:
 		enemy.connect("selected", self, "_on_Enemy_selected")
 		connect("selected", enemy, "_on_Enemy_selected")
@@ -132,6 +140,11 @@ func _on_Enemy_input_event(viewport, event, shape_idx):
 		$Selection.show()
 		# Update display to show question
 		question_display.changeMessage(question)
+		# Update display of buttons to show potential answers
+		red_button_display.update_text(answers_array[0])
+		blue_button_display.update_text(answers_array[1])
+		green_button_display.update_text(answers_array[2])
+		purple_button_display.update_text(answers_array[3])
 
 # If received selected signal from another enemy, hide selection cursor
 func _on_Enemy_selected():

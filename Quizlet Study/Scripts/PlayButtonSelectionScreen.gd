@@ -9,12 +9,12 @@ var nameList = []
 
 # When play button is clicked, save set names in global
 func _on_PlaySelectScreen_pressed():
-	# For each selected index, save corresponding name
-	for item in itemList.get_selected_items():
-		nameList.append(itemList.get_item_text(item))
-
-	# Import set into global
-	global.importCards(nameList)
-	
-	# Start game
-	get_tree().change_scene("res://Scenes/Game.tscn")
+	# Makes sure that at least one item has been selected to be able to continue to game
+	if (itemList.get_selected_items().size() >= 1):
+		# For each selected index, save corresponding name
+		for item in itemList.get_selected_items():
+			nameList.append(itemList.get_item_text(item))
+		# Import set into global
+		global.importCards(nameList)
+		# Start game
+		get_tree().change_scene("res://Scenes/Game.tscn")

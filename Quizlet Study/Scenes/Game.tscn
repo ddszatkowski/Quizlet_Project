@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/space.jpg" type="Texture" id=2]
@@ -8,27 +8,41 @@
 [ext_resource path="res://Sprites/button_off_1.png" type="Texture" id=6]
 [ext_resource path="res://Sprites/button_on_1.png" type="Texture" id=7]
 [ext_resource path="res://Sprites/button_deactivated.png" type="Texture" id=8]
-[ext_resource path="res://Sprites/button_off_2.png" type="Texture" id=9]
-[ext_resource path="res://Sprites/button_on_2.png" type="Texture" id=10]
-[ext_resource path="res://Sprites/button_off_3.png" type="Texture" id=11]
-[ext_resource path="res://Sprites/button_on_3.png" type="Texture" id=12]
-[ext_resource path="res://Sprites/button_off_4.png" type="Texture" id=13]
-[ext_resource path="res://Sprites/button_on_4.png" type="Texture" id=14]
-[ext_resource path="res://Sprites/message_screen.png" type="Texture" id=15]
-[ext_resource path="res://data-latin.ttf" type="DynamicFontData" id=16]
-[ext_resource path="res://Scripts/Question.gd" type="Script" id=17]
-[ext_resource path="res://Sprites/blue_laser.png" type="Texture" id=18]
-[ext_resource path="res://Scripts/Pause.gd" type="Script" id=19]
+[ext_resource path="res://.import/BebasNeueRegular.otf" type="DynamicFontData" id=9]
+[ext_resource path="res://Scenes/RedButtonLabel.gd" type="Script" id=10]
+[ext_resource path="res://Sprites/button_off_2.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/button_on_2.png" type="Texture" id=12]
+[ext_resource path="res://Scenes/BlueButtonLabel.gd" type="Script" id=13]
+[ext_resource path="res://Sprites/button_off_3.png" type="Texture" id=14]
+[ext_resource path="res://Sprites/button_on_3.png" type="Texture" id=15]
+[ext_resource path="res://Scenes/GreenButtonLabel.gd" type="Script" id=16]
+[ext_resource path="res://Sprites/button_off_4.png" type="Texture" id=17]
+[ext_resource path="res://Sprites/button_on_4.png" type="Texture" id=18]
+[ext_resource path="res://Scenes/PurpleButtonLabel.gd" type="Script" id=19]
+[ext_resource path="res://Sprites/message_screen.png" type="Texture" id=20]
+[ext_resource path="res://data-latin.ttf" type="DynamicFontData" id=21]
+[ext_resource path="res://Scripts/Question.gd" type="Script" id=22]
+[ext_resource path="res://Sprites/blue_laser.png" type="Texture" id=23]
+[ext_resource path="res://Scripts/Pause.gd" type="Script" id=24]
 
 [sub_resource type="DynamicFont" id=1]
+size = 25
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 25
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=2]
 size = 75
 extra_spacing_top = 20
-font_data = ExtResource( 16 )
+font_data = ExtResource( 21 )
 
-[sub_resource type="Theme" id=2]
-default_font = SubResource( 1 )
+[sub_resource type="Theme" id=3]
+default_font = SubResource( 2 )
 
-[sub_resource type="StreamTexture" id=3]
+[sub_resource type="StreamTexture" id=4]
 flags = 4
 load_path = "res://.import/blue_laser.png-5887a2ddcf53f078d8e32949bf86a28c.stex"
 
@@ -98,48 +112,116 @@ mouse_filter = 2
 texture = ExtResource( 5 )
 
 [node name="RedButton" type="TextureButton" parent="."]
-margin_left = 260.46
-margin_top = 1192.0
-margin_right = 586.46
-margin_bottom = 1509.0
+margin_left = 250.0
+margin_top = 1150.0
+margin_right = 576.0
+margin_bottom = 1467.0
 toggle_mode = true
 action_mode = 0
 texture_normal = ExtResource( 6 )
 texture_pressed = ExtResource( 7 )
 texture_disabled = ExtResource( 8 )
 
+[node name="RedButtonLabel" type="Label" parent="."]
+margin_left = 290.0
+margin_top = 1175.0
+margin_right = 545.0
+margin_bottom = 1370.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+text = "I am the red button"
+align = 1
+valign = 1
+autowrap = true
+uppercase = true
+script = ExtResource( 10 )
+
 [node name="BlueButton" type="TextureButton" parent="."]
 margin_left = 832.201
-margin_top = 1137.82
+margin_top = 1130.0
 margin_right = 1158.2
-margin_bottom = 1454.82
-toggle_mode = true
-action_mode = 0
-texture_normal = ExtResource( 9 )
-texture_pressed = ExtResource( 10 )
-texture_disabled = ExtResource( 8 )
-
-[node name="GreenButton" type="TextureButton" parent="."]
-margin_left = 1442.06
-margin_top = 1131.05
-margin_right = 1768.06
-margin_bottom = 1448.05
+margin_bottom = 1447.0
 toggle_mode = true
 action_mode = 0
 texture_normal = ExtResource( 11 )
 texture_pressed = ExtResource( 12 )
 texture_disabled = ExtResource( 8 )
 
-[node name="PurpleButton" type="TextureButton" parent="."]
-margin_left = 2032.86
-margin_top = 1171.68
-margin_right = 2358.86
-margin_bottom = 1488.68
+[node name="BlueButtonLabel" type="Label" parent="."]
+margin_left = 870.0
+margin_top = 1155.0
+margin_right = 1125.0
+margin_bottom = 1350.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+text = "I am the blue button"
+align = 1
+valign = 1
+autowrap = true
+uppercase = true
+script = ExtResource( 13 )
+
+[node name="GreenButton" type="TextureButton" parent="."]
+margin_left = 1442.06
+margin_top = 1130.0
+margin_right = 1768.06
+margin_bottom = 1447.0
 toggle_mode = true
 action_mode = 0
-texture_normal = ExtResource( 13 )
-texture_pressed = ExtResource( 14 )
+texture_normal = ExtResource( 14 )
+texture_pressed = ExtResource( 15 )
 texture_disabled = ExtResource( 8 )
+
+[node name="GreenButtonLabel" type="Label" parent="."]
+margin_left = 1480.0
+margin_top = 1155.0
+margin_right = 1735.0
+margin_bottom = 1350.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+text = "I am the green button"
+align = 1
+valign = 1
+autowrap = true
+uppercase = true
+script = ExtResource( 16 )
+
+[node name="PurpleButton" type="TextureButton" parent="."]
+margin_left = 2032.86
+margin_top = 1150.0
+margin_right = 2358.86
+margin_bottom = 1467.0
+toggle_mode = true
+action_mode = 0
+texture_normal = ExtResource( 17 )
+texture_pressed = ExtResource( 18 )
+texture_disabled = ExtResource( 8 )
+
+[node name="PurpleButtonLabel" type="Label" parent="."]
+margin_left = 2070.0
+margin_top = 1175.0
+margin_right = 2325.0
+margin_bottom = 1370.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+text = "I am the purple button"
+align = 1
+valign = 1
+autowrap = true
+uppercase = true
+script = ExtResource( 19 )
 
 [node name="QuestionScreen" type="TextureRect" parent="."]
 margin_left = 466.13
@@ -148,15 +230,15 @@ margin_right = 1966.13
 margin_bottom = 312.819
 rect_scale = Vector2( 1.32567, 1.26249 )
 mouse_filter = 2
-texture = ExtResource( 15 )
+texture = ExtResource( 20 )
 
 [node name="Question" type="Label" parent="QuestionScreen"]
 margin_left = 108.727
 margin_top = 74.3823
 margin_right = 1058.73
 margin_bottom = 224.382
-theme = SubResource( 2 )
-script = ExtResource( 17 )
+theme = SubResource( 3 )
+script = ExtResource( 22 )
 
 [node name="TextureProgress" type="TextureProgress" parent="."]
 margin_left = -36.0
@@ -164,8 +246,8 @@ margin_top = 96.0
 margin_right = 100.0
 margin_bottom = 1216.0
 value = 100.0
-texture_under = SubResource( 3 )
-texture_progress = ExtResource( 18 )
+texture_under = SubResource( 4 )
+texture_progress = ExtResource( 23 )
 fill_mode = 3
 tint_under = Color( 0.00392157, 0.00392157, 0.0196078, 1 )
 tint_over = Color( 0.133333, 0.152941, 0.470588, 1 )
@@ -184,7 +266,7 @@ margin_left = -67.8048
 margin_top = -3.99622
 margin_right = 2603.2
 margin_bottom = 1513.0
-script = ExtResource( 19 )
+script = ExtResource( 24 )
 
 [node name="PauseOverlay" type="ColorRect" parent="CanvasLayer/Pause"]
 anchor_right = 1.0
