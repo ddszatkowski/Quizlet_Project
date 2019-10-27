@@ -1,6 +1,10 @@
 extends RigidBody2D
 
 onready var question_display = get_tree().get_root().get_node("Game/QuestionScreen/Question")
+onready var red_button = get_tree().get_root().get_node("Game/RedButton")
+onready var blue_button = get_tree().get_root().get_node("Game/BlueButton")
+onready var green_button = get_tree().get_root().get_node("Game/GreenButton")
+onready var purple_button = get_tree().get_root().get_node("Game/PurpleButton")
 onready var red_button_display = get_tree().get_root().get_node("Game/RedButtonLabel")
 onready var blue_button_display = get_tree().get_root().get_node("Game/BlueButtonLabel")
 onready var green_button_display = get_tree().get_root().get_node("Game/GreenButtonLabel")
@@ -54,10 +58,6 @@ func _ready():
 	
 	# First shoot is immediately after reaching ship
 	shoot_wait = charge_steps[0]
-	
-	var temp = get_parent().get_child(6)
-	temp = temp.get_child(0)
-	#temp.connect("selected", self, "_on_Enemy_selected")
 	
 	$Selection.hide()
 
@@ -142,6 +142,11 @@ func shootLaser():
 # Updates question to the one attached
 func _on_Enemy_input_event(viewport, event, shape_idx):
 	if Input.is_action_pressed("Click"):
+		# If button is pressed, fire instead of selecting
+		if (red_button.pressed or blue_button.pressed 
+		or green_button.pressed or purple_button.pressed):
+			return
+			
 		emit_signal("selected")
 		$Selection.show()
 		# Update display to show question
@@ -151,6 +156,10 @@ func _on_Enemy_input_event(viewport, event, shape_idx):
 		blue_button_display.update_text(answers_array[1])
 		green_button_display.update_text(answers_array[2])
 		purple_button_display.update_text(answers_array[3])
+		red_button.disabled = false
+		blue_button.disabled = false
+		green_button.disabled = false
+		purple_button.disabled = false
 
 # If received selected signal from another enemy, hide selection cursor
 func _on_Enemy_selected():
