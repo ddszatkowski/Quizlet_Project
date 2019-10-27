@@ -2,10 +2,10 @@
 
 [ext_resource path="res://Scripts/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/enemy_basic_f.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/enemy_basic_charging_3.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/enemy_basic_charging_1.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/enemy_basic_l.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/enemy_basic_charging_1.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/enemy_basic_charging_2.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/enemy_basic_charging_2.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/enemy_basic_charging_3.png" type="Texture" id=6]
 [ext_resource path="res://Scripts/Laser.gd" type="Script" id=7]
 [ext_resource path="res://Sprites/red_laser.png" type="Texture" id=8]
 [ext_resource path="res://Sprites/selected.png" type="Texture" id=9]
@@ -19,7 +19,7 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
-"name": "Charge3",
+"name": "Charge1",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 4 ) ],
@@ -29,12 +29,12 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 5 ) ],
 "loop": true,
-"name": "Charge1",
+"name": "Charge2",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 6 ) ],
 "loop": true,
-"name": "Charge2",
+"name": "Charge3",
 "speed": 5.0
 } ]
 

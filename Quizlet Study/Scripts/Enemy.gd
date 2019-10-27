@@ -5,6 +5,7 @@ onready var red_button_display = get_tree().get_root().get_node("Game/RedButtonL
 onready var blue_button_display = get_tree().get_root().get_node("Game/BlueButtonLabel")
 onready var green_button_display = get_tree().get_root().get_node("Game/GreenButtonLabel")
 onready var purple_button_display = get_tree().get_root().get_node("Game/PurpleButtonLabel")
+onready var target = get_tree().get_root().get_node("Game/")
 
 var velocity = Vector2()
 
@@ -13,6 +14,8 @@ var x_max = ProjectSettings.get_setting("display/window/size/width") * 9/8
 var y_max = ProjectSettings.get_setting("display/window/size/height")
 var x_min = x_max / 4
 var y_min = y_max / 2
+
+var strength = 1
 
 var target_pos
 var top_speed = 5
@@ -28,6 +31,7 @@ var charge_steps = [4, 3, 2, 1]
 # Once ship is close enough, counts down to 0, then fires lasers
 var shoot_wait = charge_steps[0]
 var shoot_wait_max = 10
+
 
 # Should be called when enemy is spawned. 
 # Stores question and connects signals to all other enemies
@@ -125,12 +129,14 @@ func _process(delta):
 			shootLaser()
 			$AnimatedSprite.animation = "Charge0"
 			shoot_wait = shoot_wait_max
+			target.take_damage(strength)
 		shoot_wait -= delta
 		
 # Spawn lasers at ship cannons, move them to absolute coordinates at bottom of screen
 func shootLaser():
 	$Laser1.fire(Vector2(-30, 20), Vector2(x_min, 2*y_max), true)
 	$Laser2.fire(Vector2(30, 20), Vector2(x_max, 2*y_max), true)
+	
 
 # If enemy is clicked on, send selected signal to all other enemies and screen
 # Updates question to the one attached

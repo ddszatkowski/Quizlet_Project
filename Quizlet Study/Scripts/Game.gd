@@ -14,7 +14,7 @@ var group
 var card_dict
 var Mouse_Position
 #health
-var health
+onready var health = 100
 var color = "red"
 
 
@@ -26,6 +26,7 @@ func _ready():
 	var index = 0
 	var chosen_answers_idx = []
 	var rand_num
+	var health = 100
 	card_dict = global.cardSet
 	# Adds all the answers to an array
 	for question in card_dict:
@@ -60,21 +61,16 @@ func add_enemy(question, answers, correct_answer_id):
 	enemies = temp.init(enemies, question, answers, correct_answer_id)
 	add_child(temp)
 
-func _on_hit_health_changed(health):
-	take_damage(20)
-	update_health(health)
-	
 func update_health(new_value):
 	bar.value = new_value
 
 func take_damage(count):
-	health -= count
+	health = health - count
 	if health <= 0:
 		health = 0
 		get_tree().change_scene("res://Scenes/GameOver.tscn")
-	bar.value = health
+	update_health(health)
 	
-
 func _on_RedButton_toggled(button_pressed):
 	print("Red")
 	color = "red"
