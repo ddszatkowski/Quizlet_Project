@@ -30,6 +30,8 @@ var scaleVar = Vector2(.2,.2)
 var question
 var answers_array
 var correct_answer_index
+var is_selected = false
+var buttons
 signal selected(id)
 
 # Time increments within shoot_wait at which animation changes
@@ -61,6 +63,7 @@ func _ready():
 	
 	# First shoot is immediately after reaching ship
 	shoot_wait = charge_steps[0]
+	buttons = [red_button, blue_button, green_button, purple_button]
 	
 	$Selection.hide()
 
@@ -145,22 +148,16 @@ func shootLaser():
 # Updates question to the one attached
 func _on_Enemy_input_event(viewport, event, shape_idx):
 	if Input.is_action_pressed("Click"):
-		# If button is pressed, fire instead of selecting
-		# Check if correct: Hide buttons, make unselectable until another selection is made. Fire laser at enemy and destroy it. 
-		if (red_button.pressed and correct_answer_index == 0 or blue_button.pressed and correct_answer_index == 1 or green_button.pressed and correct_answer_index == 2 or purple_button.pressed and correct_answer_index == 3):
-			# Shoot laser at ship
-			print (self.get_position())
-			print (left_turret.get_position())
-			left_turret_laser.fire(Vector2(0,0), self.get_position() - left_turret.get_position(), true)
-			red_button.set_pressed(false)
-			blue_button.set_pressed(false)
-			green_button.set_pressed(false)
-			purple_button.set_pressed(false)
-			if (global.num_enemies <= 0):
-				get_tree().change_scene("res://Scenes/GameOver.tscn")
-			global.num_enemies = global.num_enemies - 1
-			self.queue_free()
-		else:
+		
+		# Find which button is pressed
+		var index_pressed = -1
+		for ind in range(0, 4):
+			if buttons[ind].pressed:
+				index_pressed = ind
+				
+		# If no button pressed, select ship
+		if index_pressed == -1:
+			is_selected = true
 			emit_signal("selected")
 			$Selection.show()
 			# Update display to show question
@@ -174,7 +171,28 @@ func _on_Enemy_input_event(viewport, event, shape_idx):
 			blue_button.disabled = false
 			green_button.disabled = false
 			purple_button.disabled = false
+			return
+
+		# If some button is pressed, shoot laser
+		print (self.get_position())
+		print (left_turret.get_position())
+		left_turret_laser.fire(Vector2(0,0), event.position - left_turret.position, false)
+
+		# If correct button pressed, shoot laser and destroy ship
+		# Will later simply fire laser, then check collision later
+		if correct_answer_index == index_pressed and is_selected:
+			# Shoot laser at ship
+			red_button.set_pressed(false)
+			blue_button.set_pressed(false)
+			green_button.set_pressed(false)
+			purple_button.set_pressed(false)
+			if (global.num_enemies <= 0):
+				get_tree().change_scene("res://Scenes/GameOver.tscn")
+			global.num_enemies = global.num_enemies - 1
+			self.queue_free()
+		
 
 # If received selected signal from another enemy, hide selection cursor
 func _on_Enemy_selected():
+	is_selected = false
 	$Selection.hide()

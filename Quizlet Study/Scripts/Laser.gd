@@ -24,10 +24,12 @@ func fire(startPos, endPos, goingForward):
 	if forward:
 		scaleVar = Vector2(1,1)
 	else:
-		scaleVar = Vector2(8,8)
+		scaleVar = Vector2(2,2)
 	
 	# Angle laser towards destination
 	angle = positionVar.angle_to_point(endPos)
+	if not forward:
+		angle += get_parent().get_parent().rotation
 	$Laser_spr.rotation = angle
 	
 	# Stop hiding laser
@@ -56,9 +58,9 @@ func _process(delta):
 			hide()
 			shown = false
 	else:
-		scaleVar.x -= 8 * delta
+		scaleVar.x -= 4 * delta
 		scaleVar.y = scaleVar.x
-		if scale.x < .5:
+		if scale.x < .2:
 			hide()
 			shown = false
 	

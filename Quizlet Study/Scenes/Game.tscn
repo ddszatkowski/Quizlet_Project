@@ -61,7 +61,7 @@ texture = ExtResource( 2 )
 
 [node name="LeftTurret" type="Sprite" parent="."]
 position = Vector2( 145.988, 1239.17 )
-rotation = -0.264639
+rotation = -0.296706
 scale = Vector2( 3.85673, 4.25171 )
 texture = ExtResource( 3 )
 centered = false
@@ -74,9 +74,9 @@ __meta__ = {
 }
 
 [node name="Muzzle" type="Position2D" parent="LeftTurret"]
-position = Vector2( 65.1585, -63.3383 )
 
 [node name="LeftTurretLaser" type="RigidBody2D" parent="LeftTurret/Muzzle"]
+position = Vector2( 65.159, -63.338 )
 script = ExtResource( 5 )
 
 [node name="Laser_spr" type="Sprite" parent="LeftTurret/Muzzle/LeftTurretLaser"]
