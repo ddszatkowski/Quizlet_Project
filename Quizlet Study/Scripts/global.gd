@@ -1,6 +1,7 @@
 extends Node
 
 var cardSet = {}
+var num_enemies # Set in ready func of game script, when this reaches 0 it goes to game over screen
 
 # Fills cardSet with all cards in sets named within set variable
 func importCards(set):

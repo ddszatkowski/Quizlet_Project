@@ -43,7 +43,8 @@ func _ready():
 		# Adding the question, answers and the index of the correct answer to the new enemy
 		add_enemy(question, chosen_answers, chosen_answers.find(answers[index]))
 		index = index + 1
-		
+	# Setting the total number of enemies to be the number of cards for now
+	global.num_enemies = index - 1
 	var player_max_health = 100
 	bar.max_value = player_max_health
 	bar.value = player_max_health
@@ -75,17 +76,13 @@ func take_damage(count):
 	update_health(health)
 	
 func _on_RedButton_toggled(button_pressed):
-	print("Red")
 	color = "red"
 	
 func _on_BlueButton_toggled(button_pressed):
-	print("Blue")
 	color = "blue"
 	
 func _on_GreenButton_toggled(button_pressed):
-	print("Green")
 	color = "green"
 	
 func _on_PurpleButton_toggled(button_pressed):
-	print("Purple")
 	color = "purple"

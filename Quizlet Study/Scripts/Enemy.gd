@@ -10,6 +10,9 @@ onready var blue_button_display = get_tree().get_root().get_node("Game/BlueButto
 onready var green_button_display = get_tree().get_root().get_node("Game/GreenButtonLabel")
 onready var purple_button_display = get_tree().get_root().get_node("Game/PurpleButtonLabel")
 onready var target = get_tree().get_root().get_node("Game/")
+onready var left_turret = get_tree().get_root().get_node("Game/LeftTurret")
+onready var left_turret_laser = get_tree().get_root().get_node("Game/LeftTurret/Muzzle/LeftTurretLaser")
+onready var global = get_node("/root/global")
 
 var velocity = Vector2()
 
@@ -143,23 +146,34 @@ func shootLaser():
 func _on_Enemy_input_event(viewport, event, shape_idx):
 	if Input.is_action_pressed("Click"):
 		# If button is pressed, fire instead of selecting
-		if (red_button.pressed or blue_button.pressed 
-		or green_button.pressed or purple_button.pressed):
-			return
-			
-		emit_signal("selected")
-		$Selection.show()
-		# Update display to show question
-		question_display.changeMessage(question)
-		# Update display of buttons to show potential answers
-		red_button_display.update_text(answers_array[0])
-		blue_button_display.update_text(answers_array[1])
-		green_button_display.update_text(answers_array[2])
-		purple_button_display.update_text(answers_array[3])
-		red_button.disabled = false
-		blue_button.disabled = false
-		green_button.disabled = false
-		purple_button.disabled = false
+		# Check if correct: Hide buttons, make unselectable until another selection is made. Fire laser at enemy and destroy it. 
+		if (red_button.pressed and correct_answer_index == 0 or blue_button.pressed and correct_answer_index == 1 or green_button.pressed and correct_answer_index == 2 or purple_button.pressed and correct_answer_index == 3):
+			# Shoot laser at ship
+			print (self.get_position())
+			print (left_turret.get_position())
+			left_turret_laser.fire(Vector2(0,0), self.get_position() - left_turret.get_position(), true)
+			red_button.set_pressed(false)
+			blue_button.set_pressed(false)
+			green_button.set_pressed(false)
+			purple_button.set_pressed(false)
+			if (global.num_enemies <= 0):
+				get_tree().change_scene("res://Scenes/GameOver.tscn")
+			global.num_enemies = global.num_enemies - 1
+			self.queue_free()
+		else:
+			emit_signal("selected")
+			$Selection.show()
+			# Update display to show question
+			question_display.changeMessage(question)
+			# Update display of buttons to show potential answers
+			red_button_display.update_text(answers_array[0])
+			blue_button_display.update_text(answers_array[1])
+			green_button_display.update_text(answers_array[2])
+			purple_button_display.update_text(answers_array[3])
+			red_button.disabled = false
+			blue_button.disabled = false
+			green_button.disabled = false
+			purple_button.disabled = false
 
 # If received selected signal from another enemy, hide selection cursor
 func _on_Enemy_selected():
