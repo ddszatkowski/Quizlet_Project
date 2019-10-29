@@ -73,14 +73,13 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Muzzle" type="Position2D" parent="LeftTurret"]
-
-[node name="LeftTurretLaser" type="RigidBody2D" parent="LeftTurret/Muzzle"]
-position = Vector2( 65.159, -63.338 )
+[node name="LeftTurretLaser" type="RigidBody2D" parent="LeftTurret"]
 script = ExtResource( 5 )
 
-[node name="Laser_spr" type="Sprite" parent="LeftTurret/Muzzle/LeftTurretLaser"]
+[node name="Laser_spr" type="Sprite" parent="LeftTurret/LeftTurretLaser"]
 texture = ExtResource( 6 )
+
+[node name="Muzzle" type="Position2D" parent="LeftTurret"]
 
 [node name="GunTimer" type="Timer" parent="LeftTurret"]
 

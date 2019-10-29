@@ -11,7 +11,8 @@ onready var green_button_display = get_tree().get_root().get_node("Game/GreenBut
 onready var purple_button_display = get_tree().get_root().get_node("Game/PurpleButtonLabel")
 onready var target = get_tree().get_root().get_node("Game/")
 onready var left_turret = get_tree().get_root().get_node("Game/LeftTurret")
-onready var left_turret_laser = get_tree().get_root().get_node("Game/LeftTurret/Muzzle/LeftTurretLaser")
+onready var left_turret_muzzle = get_tree().get_root().get_node("Game/LeftTurret/Muzzle")
+onready var left_turret_laser = get_tree().get_root().get_node("Game/LeftTurret/LeftTurretLaser")
 onready var global = get_node("/root/global")
 
 var velocity = Vector2()
@@ -174,10 +175,12 @@ func _on_Enemy_input_event(viewport, event, shape_idx):
 			return
 
 		# If some button is pressed, shoot laser
-		print (self.get_position())
-		print (left_turret.get_position())
+		print (left_turret.position)
+		print (left_turret_muzzle.position)
+		print (event.position)
+		print (get_local_mouse_position())
 		left_turret_laser.fire(Vector2(0,0), event.position - left_turret.position, false)
-
+		#left_turret_laser.fire(left_turret.position, event.position - left_turret.position, false)
 		# If correct button pressed, shoot laser and destroy ship
 		# Will later simply fire laser, then check collision later
 		if correct_answer_index == index_pressed and is_selected:
@@ -186,9 +189,21 @@ func _on_Enemy_input_event(viewport, event, shape_idx):
 			blue_button.set_pressed(false)
 			green_button.set_pressed(false)
 			purple_button.set_pressed(false)
+			# Checks for game over - i.e. all enemies have been killed
 			if (global.num_enemies <= 0):
 				get_tree().change_scene("res://Scenes/GameOver.tscn")
 			global.num_enemies = global.num_enemies - 1
+			# Resets the labels and deactivated the buttons until another ship is selected
+			question_display.changeMessage("")
+			red_button_display.update_text("")
+			blue_button_display.update_text("")
+			green_button_display.update_text("")
+			purple_button_display.update_text("")
+			red_button.disabled = true
+			blue_button.disabled = true
+			green_button.disabled = true
+			purple_button.disabled = true
+			# Deletes enemy
 			self.queue_free()
 		
 
