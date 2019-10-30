@@ -23,7 +23,7 @@ var y_max = ProjectSettings.get_setting("display/window/size/height")
 var x_min = x_max / 4
 var y_min = y_max / 2
 
-var strength = 1
+var strength = 10
 
 var target_pos
 var top_speed = 5
@@ -61,6 +61,7 @@ func _ready():
 	# Current and target positions
 	position = Vector2(randf()*(x_max-x_min) + x_min, randf()*(y_max-y_min) + y_min)
 	generate_destination()
+	set_scale(scaleVar)
 	
 	# First shoot is immediately after reaching ship
 	shoot_wait = charge_steps[0]
@@ -190,9 +191,9 @@ func _on_Enemy_input_event(viewport, event, shape_idx):
 			green_button.set_pressed(false)
 			purple_button.set_pressed(false)
 			# Checks for game over - i.e. all enemies have been killed
-			if (global.num_enemies <= 0):
+			global.num_enemies_left = global.num_enemies_left - 1
+			if (global.num_enemies_left <= 0):
 				get_tree().change_scene("res://Scenes/GameOver.tscn")
-			global.num_enemies = global.num_enemies - 1
 			# Resets the labels and deactivated the buttons until another ship is selected
 			question_display.changeMessage("")
 			red_button_display.update_text("")

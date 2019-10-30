@@ -16,6 +16,8 @@ var Mouse_Position
 #health
 onready var health = 100
 var color = "red"
+var spawnTimerMax = 3
+var spawnTimer = 0
 
 
 func _ready():
@@ -44,7 +46,8 @@ func _ready():
 		add_enemy(question, chosen_answers, chosen_answers.find(answers[index]))
 		index = index + 1
 	# Setting the total number of enemies to be the number of cards for now
-	global.num_enemies = index - 1
+	global.num_enemies_left = len(card_dict)
+	global.num_enemies_spawned = 0
 	var player_max_health = 100
 	bar.max_value = player_max_health
 	bar.value = player_max_health
@@ -62,9 +65,19 @@ func _ready():
 # Declare new enemy, call initialization and add to this node as child
 func add_enemy(question, answers, correct_answer_id):
 	var temp = enemy.instance()
+	
 	enemies = temp.init(enemies, question, answers, correct_answer_id)
-	$EnemyList.add_child(temp)
-
+	
+func _process(delta):
+	if global.num_enemies_spawned == len(enemies):
+		return
+	if spawnTimer <= 0:
+		$EnemyList.add_child(enemies[global.num_enemies_spawned])
+		global.num_enemies_spawned += 1
+		spawnTimer = spawnTimerMax
+	else:
+		spawnTimer -= delta
+	
 func update_health(new_value):
 	bar.value = new_value
 
