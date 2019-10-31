@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/space.jpg" type="Texture" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://Sprites/message_screen.png" type="Texture" id=19]
 [ext_resource path="res://data-latin.ttf" type="DynamicFontData" id=20]
 [ext_resource path="res://Scripts/Question.gd" type="Script" id=21]
+[ext_resource path="res://Scripts/Pause.gd" type="Script" id=22]
 
 [sub_resource type="DynamicFont" id=1]
 size = 25
@@ -252,6 +253,25 @@ tint_under = Color( 0.00392157, 0.00392157, 0.0196078, 1 )
 tint_over = Color( 0.133333, 0.152941, 0.470588, 1 )
 tint_progress = Color( 0.133333, 0.121569, 0.537255, 1 )
 nine_patch_stretch = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="Pause" type="Control" parent="CanvasLayer"]
+pause_mode = 2
+visible = false
+margin_left = -7.58966
+margin_top = 7.58954
+margin_right = 32.4103
+margin_bottom = 47.5895
+script = ExtResource( 22 )
+
+[node name="PauseOverlay" type="ColorRect" parent="CanvasLayer/Pause"]
+margin_left = -84.4103
+margin_top = -87.5895
+margin_right = 2064.59
+margin_bottom = 1107.41
+color = Color( 0, 0, 0, 0.305882 )
 [connection signal="toggled" from="RedButton" to="." method="_on_RedButton_toggled"]
 [connection signal="toggled" from="BlueButton" to="." method="_on_BlueButton_toggled"]
 [connection signal="toggled" from="GreenButton" to="." method="_on_GreenButton_toggled"]
