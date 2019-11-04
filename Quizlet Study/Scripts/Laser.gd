@@ -32,7 +32,7 @@ func init(startPos, endPos, color, friendly):
 		end_scale = 1
 	else:
 		start_scale = 1
-		end_scale = 8
+		end_scale = 20
 
 	scaleVar = Vector2(start_scale, start_scale)
 
@@ -55,8 +55,10 @@ func _process(delta):
 	
 	dist_covered += speed * delta
 	
-	var offset = Vector2(positionVar.x*.27, positionVar.y*.3) 
-	position = positionVar + offset
+	if friend:
+		position = positionVar + Vector2(positionVar.x*.27, positionVar.y*.3) 
+	else:
+		position = positionVar
 	
 	if friend:
 		scaleVar.x = (enemy_collide - start_scale) * dist_covered/tot_dist + start_scale
