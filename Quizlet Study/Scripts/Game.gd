@@ -3,6 +3,7 @@ extends Node2D
 # Get Enemy and Previous menu nodes
 onready var enemy = preload("res://Scenes/Enemy.tscn")
 onready var select = preload("res://Scenes/SelectMenu.tscn")
+onready var laser = preload("res://Scenes/Laser.tscn")
 # Get global variables, such as selected card set names
 onready var global = get_node("/root/global")
 # This is the shield bar we need to change for health being lost
@@ -15,9 +16,10 @@ var card_dict
 var Mouse_Position
 #health
 onready var health = 100
-var color = "red"
+var color = "Red"
 var spawnTimerMax = 3
 var spawnTimer = 0
+var shootCooldown = 0
 
 
 func _ready():
@@ -52,23 +54,19 @@ func _ready():
 	bar.max_value = player_max_health
 	bar.value = player_max_health
 	
-	group = ButtonGroup.new()
-	$RedButton.set_button_group(group)
-	$BlueButton.set_button_group(group)
-	$GreenButton.set_button_group(group)
-	$PurpleButton.set_button_group(group)
-	$RedButton.disabled = true
-	$BlueButton.disabled = true
-	$GreenButton.disabled = true
-	$PurpleButton.disabled = true
+	$RedButton.color = "Red"
+	$BlueButton.color = "Blue"
+	$GreenButton.color = "Green"
+	$PurpleButton.color = "Purple"
 
 # Declare new enemy, call initialization and add to this node as child
 func add_enemy(question, answers, correct_answer_id):
 	var temp = enemy.instance()
-	
 	enemies = temp.init(enemies, question, answers, correct_answer_id)
 	
 func _process(delta):
+	if shootCooldown > 0:
+		shootCooldown -= delta
 	if global.num_enemies_spawned == len(enemies):
 		return
 	if spawnTimer <= 0:
@@ -88,14 +86,14 @@ func take_damage(count):
 		get_tree().change_scene("res://Scenes/GameOver.tscn")
 	update_health(health)
 	
-func _on_RedButton_toggled(button_pressed):
-	color = "red"
-	
-func _on_BlueButton_toggled(button_pressed):
-	color = "blue"
-	
-func _on_GreenButton_toggled(button_pressed):
-	color = "green"
-	
-func _on_PurpleButton_toggled(button_pressed):
-	color = "purple"
+func _input(event):
+	if not ($RedButton.pressed or $BlueButton.pressed or $GreenButton.pressed or $PurpleButton.pressed):
+		return
+	if Input.is_action_pressed("Click") and shootCooldown <= 0:
+		var temp = laser.instance()
+		temp.init($LeftTurret.position + Vector2(-50, -150), get_global_mouse_position(), color, true)
+		$lasers_good.add_child(temp)
+		temp = laser.instance()
+		temp.init($RightTurret.position + Vector2(-400, -150), get_global_mouse_position(), color, true)
+		$lasers_good.add_child(temp)
+		shootCooldown = .5

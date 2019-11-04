@@ -1,4 +1,4 @@
-extends RigidBody2D
+extends KinematicBody2D
 
 onready var question_display = get_tree().get_root().get_node("Game/QuestionScreen/Question")
 onready var red_button = get_tree().get_root().get_node("Game/RedButton")
@@ -12,10 +12,11 @@ onready var purple_button_display = get_tree().get_root().get_node("Game/PurpleB
 onready var target = get_tree().get_root().get_node("Game/")
 onready var left_turret = get_tree().get_root().get_node("Game/LeftTurret")
 onready var left_turret_muzzle = get_tree().get_root().get_node("Game/LeftTurret/Muzzle")
-onready var left_turret_laser = get_tree().get_root().get_node("Game/LeftTurret/LeftTurretLaser")
+onready var laser = preload("res://Scenes/Laser.tscn")
 onready var global = get_node("/root/global")
 
 var velocity = Vector2()
+var collision_type = "Enemy"
 
 # Bounds of Movement
 var x_max = ProjectSettings.get_setting("display/window/size/width") * 9/8
@@ -84,10 +85,6 @@ func _process(delta):
 	$Selection.scale.x = 2/(scale.x)
 	$Selection.scale.y = 2/(scale.y)
 	
-	# If just fired lasers, wait
-	if $Laser1.shown:
-		return
-	
 	# If still far away, or not yet charging laser
 	if scaleVar.x < 1 or shoot_wait > charge_steps[0]:
 		# Get closer, or prepare to charge
@@ -96,7 +93,7 @@ func _process(delta):
 			scaleVar.y += .06 * delta
 		else:
 			shoot_wait -= delta
-			
+		
 		# Get velocity based on distance
 		velocity.x = (target_pos[0] - position.x) / 20
 		velocity.y = (target_pos[1] - position.y) / 20
@@ -142,13 +139,56 @@ func _process(delta):
 		
 # Spawn lasers at ship cannons, move them to absolute coordinates at bottom of screen
 func shootLaser():
-	$Laser1.fire(Vector2(-30, 20), Vector2(x_min, 2*y_max), true)
-	$Laser2.fire(Vector2(30, 20), Vector2(x_max, 2*y_max), true)
-	
+	var temp = laser.instance()
+	temp.init(position + Vector2(-30, 20), Vector2(x_min, 2*y_max), "Red", false)
+	get_parent().get_parent().get_node("lasers_bad").add_child(temp)
+	temp = laser.instance()
+	temp.init(position + Vector2(30, 20), Vector2(x_max, 2*y_max), "Red", false)
+	get_parent().get_parent().get_node("lasers_bad").add_child(temp)
 
-# If enemy is clicked on, send selected signal to all other enemies and screen
-# Updates question to the one attached
-func _on_Enemy_input_event(viewport, event, shape_idx):
+# If received selected signal from another enemy, hide selection cursor
+func _on_Enemy_selected():
+	is_selected = false
+	$Selection.hide()
+
+
+func _on_Area2D_area_entered(area):
+	var collide = area.get_parent()
+	if collide.collision_type == "Laser" and collide.friend:
+		# Check if answer is correct
+		# Find which button is pressed
+		var index_pressed = -1
+		for ind in range(0, 4):
+			if buttons[ind].pressed:
+				index_pressed = ind
+				
+		# If correct button pressed, shoot laser and destroy ship
+		if correct_answer_index == index_pressed and is_selected:
+			# Shoot laser at ship
+			red_button.set_pressed(false)
+			blue_button.set_pressed(false)
+			green_button.set_pressed(false)
+			purple_button.set_pressed(false)
+			# Checks for game over - i.e. all enemies have been killed
+			global.num_enemies_left = global.num_enemies_left - 1
+			if (global.num_enemies_left <= 0):
+				get_tree().change_scene("res://Scenes/GameOver.tscn")
+			# Resets the labels and deactivated the buttons until another ship is selected
+			question_display.changeMessage("")
+			red_button_display.update_text("")
+			blue_button_display.update_text("")
+			green_button_display.update_text("")
+			purple_button_display.update_text("")
+			red_button.disabled = true
+			blue_button.disabled = true
+			green_button.disabled = true
+			purple_button.disabled = true
+			# Deletes enemy
+			get_parent().remove_child(collide)
+			self.queue_free()
+
+
+func _on_Area2D_input_event(viewport, event, shape_idx):
 	if Input.is_action_pressed("Click"):
 		
 		# Find which button is pressed
@@ -174,41 +214,3 @@ func _on_Enemy_input_event(viewport, event, shape_idx):
 			green_button.disabled = false
 			purple_button.disabled = false
 			return
-
-		# If some button is pressed, shoot laser
-		print (left_turret.position)
-		print (left_turret_muzzle.position)
-		print (event.position)
-		print (get_local_mouse_position())
-		left_turret_laser.fire(Vector2(0,0), event.position - left_turret.position, false)
-		#left_turret_laser.fire(left_turret.position, event.position - left_turret.position, false)
-		# If correct button pressed, shoot laser and destroy ship
-		# Will later simply fire laser, then check collision later
-		if correct_answer_index == index_pressed and is_selected:
-			# Shoot laser at ship
-			red_button.set_pressed(false)
-			blue_button.set_pressed(false)
-			green_button.set_pressed(false)
-			purple_button.set_pressed(false)
-			# Checks for game over - i.e. all enemies have been killed
-			global.num_enemies_left = global.num_enemies_left - 1
-			if (global.num_enemies_left <= 0):
-				get_tree().change_scene("res://Scenes/GameOver.tscn")
-			# Resets the labels and deactivated the buttons until another ship is selected
-			question_display.changeMessage("")
-			red_button_display.update_text("")
-			blue_button_display.update_text("")
-			green_button_display.update_text("")
-			purple_button_display.update_text("")
-			red_button.disabled = true
-			blue_button.disabled = true
-			green_button.disabled = true
-			purple_button.disabled = true
-			# Deletes enemy
-			self.queue_free()
-		
-
-# If received selected signal from another enemy, hide selection cursor
-func _on_Enemy_selected():
-	is_selected = false
-	$Selection.hide()

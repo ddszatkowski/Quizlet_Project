@@ -2,65 +2,68 @@ extends RigidBody2D
 
 var angle
 var end
-var shown
 var scaleVar
-var forward
+var friend
 var positionVar
+var tot_dist
+var org_pos
+var dist_covered = 0
+var speed = 2000
+var direction
+var start_scale
+var end_scale
+var enemy_collide = 2
+var collision_type = "Laser"
+var laser_color
 
-# Hide laser until it is fired
-func _ready():
-	positionVar = Vector2(0,0)
-	scaleVar = Vector2(1,1)
-	shown = false
-	hide()
-
-# Set position to start, angle sprite towards destination
-func fire(startPos, endPos, goingForward):
+func init(startPos, endPos, color, friendly):
+	org_pos = startPos
 	positionVar = startPos
+	friend = friendly
+	position = positionVar
 	end = endPos
-	forward = goingForward
+	
+	tot_dist = (endPos - startPos).length()
+	direction = (end - positionVar).normalized()
 	
 	# Set laser starting size depending on direction
-	if forward:
-		scaleVar = Vector2(1,1)
+	if friendly:
+		start_scale = 5
+		end_scale = 1
 	else:
-		scaleVar = Vector2(2,2)
-	
+		start_scale = 1
+		end_scale = 8
+
+	scaleVar = Vector2(start_scale, start_scale)
+
+	laser_color = color
+	$Sprites.animation = color
+		
 	# Angle laser towards destination
-	angle = positionVar.angle_to_point(endPos)
-	if not forward:
-		angle += get_parent().get_parent().rotation
-	$Laser_spr.rotation = angle
+	var y_diff = positionVar.y - endPos.y
+	var x_diff = endPos.x - positionVar.x
 	
-	# Stop hiding laser
-	show()
-	shown = true
+	angle = atan(y_diff/x_diff)
+	$Sprites.rotation = -angle
 
 func _process(delta):
-	# Set position and scale to variable values (Fixes strange bug)
-	position = positionVar
 	scale = scaleVar
 	
-	# If laser is hidden, end here
-	if not shown:
-		return
-	
 	# Set velocity in destination direction
-	var velocity = positionVar.direction_to(end) * delta * 1500
-	positionVar.y += velocity.y
-	positionVar.x += velocity.x
+	var velocity = direction * speed * delta
+	positionVar += velocity
 	
-	# Grow or shrink laser based on direction, hide at point
-	if forward:
-		scaleVar.x += 8 * delta
-		scaleVar.y = scaleVar.x
-		if scale.x > 8:
-			hide()
-			shown = false
+	dist_covered += speed * delta
+	
+	var offset = Vector2(positionVar.x*.27, positionVar.y*.3) 
+	position = positionVar + offset
+	
+	if friend:
+		scaleVar.x = (enemy_collide - start_scale) * dist_covered/tot_dist + start_scale
 	else:
-		scaleVar.x -= 4 * delta
-		scaleVar.y = scaleVar.x
-		if scale.x < .2:
-			hide()
-			shown = false
+		scaleVar.x = (end_scale - start_scale) * dist_covered/tot_dist + start_scale
+	scaleVar.y = scaleVar.x
+	if (friend and scale.x < end_scale) or (not friend and scale.x > end_scale):
+		get_parent().remove_child(self)
 	
+

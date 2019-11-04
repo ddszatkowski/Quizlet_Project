@@ -4,38 +4,38 @@
 [ext_resource path="res://Sprites/space.jpg" type="Texture" id=2]
 [ext_resource path="res://Sprites/red_turret.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/Turret.gd" type="Script" id=4]
-[ext_resource path="res://Scripts/Laser.gd" type="Script" id=5]
-[ext_resource path="res://Sprites/blue_laser.png" type="Texture" id=6]
-[ext_resource path="res://Sprites/base_frame.png" type="Texture" id=7]
-[ext_resource path="res://Sprites/button_off_1.png" type="Texture" id=8]
-[ext_resource path="res://Sprites/button_on_1.png" type="Texture" id=9]
-[ext_resource path="res://Sprites/button_deactivated.png" type="Texture" id=10]
-[ext_resource path="res://.import/BebasNeueRegular.otf" type="DynamicFontData" id=11]
-[ext_resource path="res://Scenes/ButtonLabel.gd" type="Script" id=12]
-[ext_resource path="res://Sprites/button_off_2.png" type="Texture" id=13]
-[ext_resource path="res://Sprites/button_on_2.png" type="Texture" id=14]
-[ext_resource path="res://Sprites/button_off_3.png" type="Texture" id=15]
-[ext_resource path="res://Sprites/button_on_3.png" type="Texture" id=16]
-[ext_resource path="res://Sprites/button_off_4.png" type="Texture" id=17]
-[ext_resource path="res://Sprites/button_on_4.png" type="Texture" id=18]
-[ext_resource path="res://Sprites/message_screen.png" type="Texture" id=19]
-[ext_resource path="res://data-latin.ttf" type="DynamicFontData" id=20]
-[ext_resource path="res://Scripts/Question.gd" type="Script" id=21]
+[ext_resource path="res://Sprites/base_frame.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/button_off_1.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/button_on_1.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/button_deactivated.png" type="Texture" id=8]
+[ext_resource path="res://Scenes/Button.gd" type="Script" id=9]
+[ext_resource path="res://.import/BebasNeueRegular.otf" type="DynamicFontData" id=10]
+[ext_resource path="res://Scenes/ButtonLabel.gd" type="Script" id=11]
+[ext_resource path="res://Sprites/button_off_2.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/button_on_2.png" type="Texture" id=13]
+[ext_resource path="res://Sprites/button_off_3.png" type="Texture" id=14]
+[ext_resource path="res://Sprites/button_on_3.png" type="Texture" id=15]
+[ext_resource path="res://Sprites/button_off_4.png" type="Texture" id=16]
+[ext_resource path="res://Sprites/button_on_4.png" type="Texture" id=17]
+[ext_resource path="res://Sprites/message_screen.png" type="Texture" id=18]
+[ext_resource path="res://data-latin.ttf" type="DynamicFontData" id=19]
+[ext_resource path="res://Scripts/Question.gd" type="Script" id=20]
+[ext_resource path="res://Sprites/blue_laser.png" type="Texture" id=21]
 [ext_resource path="res://Scripts/Pause.gd" type="Script" id=22]
 
 [sub_resource type="DynamicFont" id=1]
 size = 25
 outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 11 )
+font_data = ExtResource( 10 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 25
-font_data = ExtResource( 11 )
+font_data = ExtResource( 10 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 75
 extra_spacing_top = 20
-font_data = ExtResource( 20 )
+font_data = ExtResource( 19 )
 
 [sub_resource type="Theme" id=4]
 default_font = SubResource( 3 )
@@ -45,7 +45,6 @@ flags = 4
 load_path = "res://.import/blue_laser.png-5887a2ddcf53f078d8e32949bf86a28c.stex"
 
 [node name="Game" type="Node2D"]
-position = Vector2( -7.58966, 7.58954 )
 scale = Vector2( 0.771989, 0.72411 )
 script = ExtResource( 1 )
 
@@ -60,6 +59,10 @@ texture = ExtResource( 2 )
 
 [node name="EnemyList" type="Node2D" parent="."]
 
+[node name="lasers_good" type="Node2D" parent="."]
+
+[node name="lasers_bad" type="Node2D" parent="."]
+
 [node name="LeftTurret" type="Sprite" parent="."]
 position = Vector2( 145.988, 1239.17 )
 rotation = -0.296706
@@ -73,12 +76,6 @@ script = ExtResource( 4 )
 __meta__ = {
 "_edit_group_": true
 }
-
-[node name="LeftTurretLaser" type="RigidBody2D" parent="LeftTurret"]
-script = ExtResource( 5 )
-
-[node name="Laser_spr" type="Sprite" parent="LeftTurret/LeftTurretLaser"]
-texture = ExtResource( 6 )
 
 [node name="Muzzle" type="Position2D" parent="LeftTurret"]
 
@@ -112,7 +109,7 @@ margin_right = 1676.51
 margin_bottom = 829.85
 rect_scale = Vector2( 1.52222, 1.77895 )
 mouse_filter = 2
-texture = ExtResource( 7 )
+texture = ExtResource( 5 )
 
 [node name="RedButton" type="TextureButton" parent="."]
 margin_left = 250.0
@@ -121,10 +118,11 @@ margin_right = 576.0
 margin_bottom = 1467.0
 toggle_mode = true
 action_mode = 0
-texture_normal = ExtResource( 8 )
-texture_pressed = ExtResource( 9 )
-texture_disabled = ExtResource( 10 )
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 7 )
+texture_disabled = ExtResource( 8 )
 expand = true
+script = ExtResource( 9 )
 
 [node name="RedButtonLabel" type="Label" parent="."]
 margin_left = 290.0
@@ -140,7 +138,7 @@ align = 1
 valign = 1
 autowrap = true
 uppercase = true
-script = ExtResource( 12 )
+script = ExtResource( 11 )
 
 [node name="BlueButton" type="TextureButton" parent="."]
 margin_left = 832.201
@@ -149,9 +147,10 @@ margin_right = 1158.2
 margin_bottom = 1447.0
 toggle_mode = true
 action_mode = 0
-texture_normal = ExtResource( 13 )
-texture_pressed = ExtResource( 14 )
-texture_disabled = ExtResource( 10 )
+texture_normal = ExtResource( 12 )
+texture_pressed = ExtResource( 13 )
+texture_disabled = ExtResource( 8 )
+script = ExtResource( 9 )
 
 [node name="BlueButtonLabel" type="Label" parent="."]
 margin_left = 870.0
@@ -167,7 +166,7 @@ align = 1
 valign = 1
 autowrap = true
 uppercase = true
-script = ExtResource( 12 )
+script = ExtResource( 11 )
 
 [node name="GreenButton" type="TextureButton" parent="."]
 margin_left = 1442.06
@@ -176,9 +175,10 @@ margin_right = 1768.06
 margin_bottom = 1447.0
 toggle_mode = true
 action_mode = 0
-texture_normal = ExtResource( 15 )
-texture_pressed = ExtResource( 16 )
-texture_disabled = ExtResource( 10 )
+texture_normal = ExtResource( 14 )
+texture_pressed = ExtResource( 15 )
+texture_disabled = ExtResource( 8 )
+script = ExtResource( 9 )
 
 [node name="GreenButtonLabel" type="Label" parent="."]
 margin_left = 1480.0
@@ -194,7 +194,7 @@ align = 1
 valign = 1
 autowrap = true
 uppercase = true
-script = ExtResource( 12 )
+script = ExtResource( 11 )
 
 [node name="PurpleButton" type="TextureButton" parent="."]
 margin_left = 2032.86
@@ -203,9 +203,10 @@ margin_right = 2358.86
 margin_bottom = 1467.0
 toggle_mode = true
 action_mode = 0
-texture_normal = ExtResource( 17 )
-texture_pressed = ExtResource( 18 )
-texture_disabled = ExtResource( 10 )
+texture_normal = ExtResource( 16 )
+texture_pressed = ExtResource( 17 )
+texture_disabled = ExtResource( 8 )
+script = ExtResource( 9 )
 
 [node name="PurpleButtonLabel" type="Label" parent="."]
 margin_left = 2070.0
@@ -221,7 +222,7 @@ align = 1
 valign = 1
 autowrap = true
 uppercase = true
-script = ExtResource( 12 )
+script = ExtResource( 11 )
 
 [node name="QuestionScreen" type="TextureRect" parent="."]
 margin_left = 466.13
@@ -230,7 +231,7 @@ margin_right = 1966.13
 margin_bottom = 312.819
 rect_scale = Vector2( 1.32567, 1.26249 )
 mouse_filter = 2
-texture = ExtResource( 19 )
+texture = ExtResource( 18 )
 
 [node name="Question" type="Label" parent="QuestionScreen"]
 margin_left = 108.727
@@ -238,7 +239,7 @@ margin_top = 74.3823
 margin_right = 1058.73
 margin_bottom = 224.382
 theme = SubResource( 4 )
-script = ExtResource( 21 )
+script = ExtResource( 20 )
 
 [node name="TextureProgress" type="TextureProgress" parent="."]
 margin_left = -36.0
@@ -247,7 +248,7 @@ margin_right = 100.0
 margin_bottom = 1216.0
 value = 100.0
 texture_under = SubResource( 5 )
-texture_progress = ExtResource( 6 )
+texture_progress = ExtResource( 21 )
 fill_mode = 3
 tint_under = Color( 0.00392157, 0.00392157, 0.0196078, 1 )
 tint_over = Color( 0.133333, 0.152941, 0.470588, 1 )
@@ -272,7 +273,6 @@ margin_top = -87.5895
 margin_right = 2064.59
 margin_bottom = 1107.41
 color = Color( 0, 0, 0, 0.305882 )
-[connection signal="toggled" from="RedButton" to="." method="_on_RedButton_toggled"]
 [connection signal="toggled" from="BlueButton" to="." method="_on_BlueButton_toggled"]
 [connection signal="toggled" from="GreenButton" to="." method="_on_GreenButton_toggled"]
 [connection signal="toggled" from="PurpleButton" to="." method="_on_PurpleButton_toggled"]

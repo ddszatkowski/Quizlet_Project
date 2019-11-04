@@ -1,14 +1,12 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/enemy_basic_charging_3.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/enemy_basic_charging_2.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/enemy_basic_l.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/enemy_basic_charging_1.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/enemy_basic_f.png" type="Texture" id=6]
-[ext_resource path="res://Scripts/Laser.gd" type="Script" id=7]
-[ext_resource path="res://Sprites/red_laser.png" type="Texture" id=8]
-[ext_resource path="res://Sprites/selected.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/enemy_basic_charging_1.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/enemy_basic_f.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/enemy_basic_l.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/selected.png" type="Texture" id=7]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -24,24 +22,24 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 4 ) ],
 "loop": true,
-"name": "Dodging",
+"name": "Charge1",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 5 ) ],
 "loop": true,
-"name": "Charge1",
+"name": "Charge0",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 6 ) ],
 "loop": true,
-"name": "Charge0",
+"name": "Dodging",
 "speed": 5.0
 } ]
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 2.77, -3.95, 4.05, -3.1, 5.7, -0.45, 8.95, -0.53, 5.72, 2.43, 8.63, 5.02, 5.72, 5.16, 3.92, 8.36, -4.18, 8.42, -5.76, 5.17, -8.8, 5.18, -5.68, 2.4, -8.71, -0.48, -5.66, -0.49, -3.48, -4.03, -2.52, -3.86, -1.88, -7.2, -0.11, -8.65, 1.68, -8.04 )
 
-[node name="Enemy" type="RigidBody2D"]
+[node name="Enemy" type="KinematicBody2D"]
 position = Vector2( 490.798, 636.181 )
 input_pickable = true
 script = ExtResource( 1 )
@@ -50,24 +48,14 @@ script = ExtResource( 1 )
 frames = SubResource( 1 )
 animation = "Charge3"
 
-[node name="Laser1" type="RigidBody2D" parent="."]
-position = Vector2( 0, -2.74858 )
-script = ExtResource( 7 )
-
-[node name="Laser_spr" type="Sprite" parent="Laser1"]
-texture = ExtResource( 8 )
-
-[node name="Laser2" type="RigidBody2D" parent="."]
-script = ExtResource( 7 )
-
-[node name="Laser_spr" type="Sprite" parent="Laser2"]
-texture = ExtResource( 8 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2( 13.0031, 6.72679 )
-shape = SubResource( 2 )
-
 [node name="Selection" type="Sprite" parent="."]
 scale = Vector2( 2.75812, 2.25446 )
-texture = ExtResource( 9 )
-[connection signal="input_event" from="." to="." method="_on_Enemy_input_event"]
+texture = ExtResource( 7 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2( 13.0031, 6.72679 )
+shape = SubResource( 2 )
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="input_event" from="Area2D" to="." method="_on_Area2D_input_event"]
