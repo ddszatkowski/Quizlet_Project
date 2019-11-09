@@ -7,4 +7,7 @@ func _input(event):
 		visible = new_paused_state
 
 func _on_MainMenuButton_pressed():
+	var new_paused_state = not get_tree().paused
+	get_tree().paused = new_paused_state
+	visible = new_paused_state
 	get_tree().change_scene("res://Scenes/MainMenu.tscn")
