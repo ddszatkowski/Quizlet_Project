@@ -34,6 +34,7 @@ var answers_array
 var correct_answer_index
 var is_selected = false
 var buttons
+var dying = false
 signal selected(id)
 
 # Time increments within shoot_wait at which animation changes
@@ -78,6 +79,10 @@ func generate_destination():
 	
 
 func _process(delta):
+	# If enemy is in the process of dying, stop and do that
+	if dying:
+		return 
+	
 	# Set scale of enemy to variable
 	set_scale(scaleVar)
 	
@@ -151,7 +156,7 @@ func _on_Enemy_selected():
 	is_selected = false
 	$Selection.hide()
 
-
+# Checks if the lazers hit the ship and if it was the correct answer or not
 func _on_Area2D_area_entered(area):
 	var collide = area.get_parent()
 	if collide.collision_type == "Laser" and collide.friend:
@@ -164,6 +169,8 @@ func _on_Area2D_area_entered(area):
 				
 		# If correct button pressed, shoot laser and destroy ship
 		if correct_answer_index == index_pressed and is_selected:
+			# Since game is about to kill enemy stop having it move around
+			dying = true
 			# Shoot laser at ship
 			red_button.set_pressed(false)
 			blue_button.set_pressed(false)
@@ -183,10 +190,13 @@ func _on_Area2D_area_entered(area):
 			blue_button.disabled = true
 			green_button.disabled = true
 			purple_button.disabled = true
+			#Explosion animation
+			$AnimatedSprite.set_scale(Vector2(2, 2))
+			$AnimatedSprite.play("Explosion")
+			yield(get_tree().create_timer(.3), "timeout")
 			# Deletes enemy
 			get_parent().remove_child(collide)
 			self.queue_free()
-
 
 func _on_Area2D_input_event(viewport, event, shape_idx):
 	if Input.is_action_pressed("Click"):
