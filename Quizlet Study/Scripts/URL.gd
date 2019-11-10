@@ -39,7 +39,7 @@ func _on_HTTPRequest_request_completed( result, response_code, headers, body ):
 		defStr = defStr.left(defStr.find('"'))
 		# Filters out incorrect catches
 		if defStr != "" and defStr.findn("html lang") == -1:
-			set_dict[wordStr] = defStr
+			set_dict[defStr] = wordStr
 	
 	# Save set to whole file under title
 	save_dict[title] = set_dict

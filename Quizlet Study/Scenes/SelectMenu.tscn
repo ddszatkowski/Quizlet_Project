@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/SelectMenu.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/back.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/BackButtonToMainMenu.gd" type="Script" id=3]
 [ext_resource path="res://Sprites/bitmap.png" type="Texture" id=4]
 [ext_resource path="res://Scripts/PlayButtonSelectionScreen.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/Preview.gd" type="Script" id=6]
+[ext_resource path="res://Sprites/Swap-button.png" type="Texture" id=7]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://.import/BebasNeueRegular.otf"
@@ -37,24 +39,62 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 2 )
 select_mode = 1
+allow_reselect = true
 max_text_lines = 50
 auto_height = true
 
 [node name="PlayButton" type="TextureButton" parent="."]
-margin_left = 850.0
-margin_top = 300.0
-margin_right = 1612.0
-margin_bottom = 516.0
+margin_left = 858.852
+margin_top = 636.579
+margin_right = 1620.85
+margin_bottom = 852.579
 rect_scale = Vector2( 0.6, 0.7 )
 texture_normal = ExtResource( 4 )
 script = ExtResource( 5 )
 
 [node name="Instructions" type="RichTextLabel" parent="."]
-margin_left = 68.4738
-margin_top = 786.105
-margin_right = 568.474
-margin_bottom = 836.105
+margin_left = 66.703
+margin_top = 795.39
+margin_right = 550.423
+margin_bottom = 811.46
 rect_scale = Vector2( 1.5, 1.5 )
 text = "HOLD CONTROL DOWN WHILE SELECTING TO MAKE MULTIPLE SELECTIONS"
+
+[node name="Preview" type="Label" parent="."]
+margin_left = 845.026
+margin_top = 54.1547
+margin_right = 962.696
+margin_bottom = 68.1547
+rect_scale = Vector2( 3.2, 3.14 )
+text = "Question Preview
+
+
+
+Answer Preview"
+script = ExtResource( 6 )
+
+[node name="QuestionPreview" type="Label" parent="Preview"]
+margin_left = 1.0
+margin_top = 16.0
+margin_right = 726.0
+margin_bottom = 266.0
+rect_scale = Vector2( 0.2, 0.2 )
+
+[node name="AnswerPreview" type="Label" parent="Preview"]
+margin_left = 1.0
+margin_top = 84.0
+margin_right = 731.0
+margin_bottom = 494.0
+rect_scale = Vector2( 0.2, 0.2 )
+
+[node name="SwapButton" type="TextureButton" parent="."]
+margin_left = 683.495
+margin_top = 12.162
+margin_right = 733.495
+margin_bottom = 62.162
+rect_scale = Vector2( 2.3, 2.3 )
+texture_normal = ExtResource( 7 )
 [connection signal="pressed" from="Back" to="Back" method="_on_Back_pressed"]
+[connection signal="item_activated" from="CardSetList" to="Preview" method="_on_CardSetList_item_activated"]
 [connection signal="pressed" from="PlayButton" to="PlayButton" method="_on_PlaySelectScreen_pressed"]
+[connection signal="pressed" from="SwapButton" to="Preview" method="_on_SwapButton_pressed"]
