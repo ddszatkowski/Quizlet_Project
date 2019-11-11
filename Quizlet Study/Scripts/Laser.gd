@@ -68,4 +68,5 @@ func _process(delta):
 	if (friend and scale.x < end_scale) or (not friend and scale.x > end_scale):
 		get_parent().remove_child(self)
 	
-
+func _on_Area2D_area_entered(area):
+	pass

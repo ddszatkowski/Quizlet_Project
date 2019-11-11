@@ -2,9 +2,9 @@
 
 [ext_resource path="res://Scripts/Laser.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/purple_laser.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/red_laser.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/green_laser.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/blue_laser.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/blue_laser.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/red_laser.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/green_laser.png" type="Texture" id=5]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -15,17 +15,17 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
-"name": "Red",
+"name": "Blue",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 4 ) ],
 "loop": true,
-"name": "Green",
+"name": "Red",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 5 ) ],
 "loop": true,
-"name": "Blue",
+"name": "Green",
 "speed": 5.0
 } ]
 

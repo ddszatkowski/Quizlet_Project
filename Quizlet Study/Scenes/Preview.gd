@@ -25,7 +25,7 @@ func _on_SwapButton_pressed():
 		global.cardSet.erase(key)
 	update_preview()
 
-func _on_CardSetList_item_activated(index):
+func _on_CardSetList_multi_selected(index, selected):
 	nameList = []
 	for item in itemList.get_selected_items():
 			nameList.append(itemList.get_item_text(item))

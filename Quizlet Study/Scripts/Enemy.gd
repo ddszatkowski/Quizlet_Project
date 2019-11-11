@@ -181,7 +181,7 @@ func _on_Area2D_area_entered(area):
 			if (global.num_enemies_left <= 0):
 				get_tree().change_scene("res://Scenes/GameOver.tscn")
 			# Resets the labels and deactivated the buttons until another ship is selected
-			question_display.changeMessage("")
+			question_display.changeMessage("NO TARGET SELECTED")
 			red_button_display.update_text("")
 			blue_button_display.update_text("")
 			green_button_display.update_text("")
@@ -193,9 +193,10 @@ func _on_Area2D_area_entered(area):
 			#Explosion animation
 			$AnimatedSprite.set_scale(Vector2(2, 2))
 			$AnimatedSprite.play("Explosion")
+			get_parent().remove_child(collide)
+			collide.queue_free()
 			yield(get_tree().create_timer(.3), "timeout")
 			# Deletes enemy
-			get_parent().remove_child(collide)
 			self.queue_free()
 
 func _on_Area2D_input_event(viewport, event, shape_idx):

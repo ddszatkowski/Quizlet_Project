@@ -95,6 +95,6 @@ margin_bottom = 62.162
 rect_scale = Vector2( 2.3, 2.3 )
 texture_normal = ExtResource( 7 )
 [connection signal="pressed" from="Back" to="Back" method="_on_Back_pressed"]
-[connection signal="item_activated" from="CardSetList" to="Preview" method="_on_CardSetList_item_activated"]
+[connection signal="multi_selected" from="CardSetList" to="Preview" method="_on_CardSetList_multi_selected"]
 [connection signal="pressed" from="PlayButton" to="PlayButton" method="_on_PlaySelectScreen_pressed"]
 [connection signal="pressed" from="SwapButton" to="Preview" method="_on_SwapButton_pressed"]

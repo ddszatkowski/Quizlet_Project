@@ -239,9 +239,12 @@ texture = ExtResource( 18 )
 [node name="Question" type="Label" parent="QuestionScreen"]
 margin_left = 108.727
 margin_top = 74.3823
-margin_right = 1058.73
-margin_bottom = 224.382
+margin_right = 1068.73
+margin_bottom = 313.382
+size_flags_vertical = 1
 theme = SubResource( 4 )
+custom_constants/line_spacing = -35
+align = 1
 script = ExtResource( 20 )
 
 [node name="TextureProgress" type="TextureProgress" parent="."]
