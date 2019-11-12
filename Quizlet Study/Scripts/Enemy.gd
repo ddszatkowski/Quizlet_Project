@@ -34,7 +34,7 @@ var answers_array
 var correct_answer_index
 var is_selected = false
 var buttons
-var dying = false
+var shielding_or_dying = false
 signal selected(id)
 
 # Time increments within shoot_wait at which animation changes
@@ -69,6 +69,10 @@ func _ready():
 	shoot_wait = charge_steps[0]
 	buttons = [red_button, blue_button, green_button, purple_button]
 	
+	# Hide Shield
+	$ShieldAnimation.set_scale(Vector2(3, 3))
+	$ShieldAnimation.hide()
+	
 	$Selection.hide()
 
 # Find location within bounds that is at least 80 pixels from current position
@@ -80,67 +84,65 @@ func generate_destination():
 
 func _process(delta):
 	# If enemy is in the process of dying, stop and do that
-	if dying:
-		return 
-	
-	# Set scale of enemy to variable
-	set_scale(scaleVar)
-	
-	# Keep Selection scale from inheriting from enemy
-	$Selection.scale.x = 2/(scale.x)
-	$Selection.scale.y = 2/(scale.y)
-	
-	# If still far away, or not yet charging laser
-	if scaleVar.x < 1 or shoot_wait > charge_steps[0]:
-		# Get closer, or prepare to charge
-		if scaleVar.x < 1:
-			scaleVar.x += .06 * delta
-			scaleVar.y += .06 * delta
-		else:
-			shoot_wait -= delta
+	if !shielding_or_dying:
+		# Set scale of enemy to variable
+		set_scale(scaleVar)
 		
-		# Get velocity based on distance
-		velocity.x = (target_pos[0] - position.x) / 20
-		velocity.y = (target_pos[1] - position.y) / 20
-		if velocity.x > top_speed:
-			velocity.x = top_speed
-		if velocity.x < -top_speed:
-			velocity.x = -top_speed
-		if velocity.y > top_speed:
-			velocity.y = top_speed
-		if velocity.y < -top_speed:
-			velocity.y = -top_speed
+		# Keep Selection scale from inheriting from enemy
+		$Selection.scale.x = 2/(scale.x)
+		$Selection.scale.y = 2/(scale.y)
+		
+		# If still far away, or not yet charging laser
+		if scaleVar.x < 1 or shoot_wait > charge_steps[0]:
+			# Get closer, or prepare to charge
+			if scaleVar.x < 1:
+				scaleVar.x += .06 * delta
+				scaleVar.y += .06 * delta
+			else:
+				shoot_wait -= delta
 			
-		# Move within bounds
-		position += velocity * delta * 50
-		position.x = clamp(position.x, x_min, x_max)
-		position.y = clamp(position.y, y_min, y_max)
-		
-		# If close to destination, retarget
-		if abs(velocity.x) < .5 and abs(velocity.y) < .5:
-			generate_destination()
-		
-		# Flip sprite based on direction
-		$AnimatedSprite.flip_h = velocity.x > 0
-		$AnimatedSprite.animation = "Dodging"
-		
-	else:
-		# Change sprite based on level of charge
-		if shoot_wait > charge_steps[1]:
-			$AnimatedSprite.animation = "Charge0"
-		elif shoot_wait > charge_steps[2]:
-			$AnimatedSprite.animation = "Charge1"
-		elif shoot_wait > charge_steps[3]:
-			$AnimatedSprite.animation = "Charge2"
-		elif shoot_wait > 0:
-			$AnimatedSprite.animation = "Charge3"
-		# If finished, shoot lasers
+			# Get velocity based on distance
+			velocity.x = (target_pos[0] - position.x) / 20
+			velocity.y = (target_pos[1] - position.y) / 20
+			if velocity.x > top_speed:
+				velocity.x = top_speed
+			if velocity.x < -top_speed:
+				velocity.x = -top_speed
+			if velocity.y > top_speed:
+				velocity.y = top_speed
+			if velocity.y < -top_speed:
+				velocity.y = -top_speed
+				
+			# Move within bounds
+			position += velocity * delta * 50
+			position.x = clamp(position.x, x_min, x_max)
+			position.y = clamp(position.y, y_min, y_max)
+			
+			# If close to destination, retarget
+			if abs(velocity.x) < .5 and abs(velocity.y) < .5:
+				generate_destination()
+			
+			# Flip sprite based on direction
+			$AnimatedSprite.flip_h = velocity.x > 0
+			$AnimatedSprite.animation = "Dodging"
+			
 		else:
-			shootLaser()
-			$AnimatedSprite.animation = "Charge0"
-			shoot_wait = shoot_wait_max
-			target.take_damage(strength)
-		shoot_wait -= delta
+			# Change sprite based on level of charge
+			if shoot_wait > charge_steps[1]:
+				$AnimatedSprite.animation = "Charge0"
+			elif shoot_wait > charge_steps[2]:
+				$AnimatedSprite.animation = "Charge1"
+			elif shoot_wait > charge_steps[3]:
+				$AnimatedSprite.animation = "Charge2"
+			elif shoot_wait > 0:
+				$AnimatedSprite.animation = "Charge3"
+			# If finished, shoot lasers
+			else:
+				shootLaser()
+				$AnimatedSprite.animation = "Charge0"
+				shoot_wait = shoot_wait_max
+				target.take_damage(strength)
+			shoot_wait -= delta
 		
 # Spawn lasers at ship cannons, move them to absolute coordinates at bottom of screen
 func shootLaser():
@@ -170,8 +172,8 @@ func _on_Area2D_area_entered(area):
 		# If correct button pressed, shoot laser and destroy ship
 		if correct_answer_index == index_pressed and is_selected:
 			# Since game is about to kill enemy stop having it move around
-			dying = true
 			# Shoot laser at ship
+			shielding_or_dying = true
 			red_button.set_pressed(false)
 			blue_button.set_pressed(false)
 			green_button.set_pressed(false)
@@ -198,6 +200,14 @@ func _on_Area2D_area_entered(area):
 			yield(get_tree().create_timer(.3), "timeout")
 			# Deletes enemy
 			self.queue_free()
+		elif correct_answer_index != index_pressed and is_selected:
+			shielding_or_dying = true
+			$ShieldAnimation.show()
+			get_parent().remove_child(collide)
+			collide.queue_free()
+			yield(get_tree().create_timer(.3), "timeout")
+			$ShieldAnimation.hide()
+			shielding_or_dying = false
 
 func _on_Area2D_input_event(viewport, event, shape_idx):
 	if Input.is_action_pressed("Click"):
