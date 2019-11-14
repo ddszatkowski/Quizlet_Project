@@ -3,6 +3,7 @@ extends Node
 var cardSet = {}
 var num_enemies_left # Set in ready func of game script, when this reaches 0 it goes to game over screen
 var num_enemies_spawned
+var spawnTimerMax = 3
 # Fills cardSet with all cards in sets named within set variable
 func importCards(set):
 	cardSet = {}

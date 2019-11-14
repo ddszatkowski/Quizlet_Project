@@ -17,7 +17,6 @@ var Mouse_Position
 #health
 onready var health = 100
 var color = "Red"
-var spawnTimerMax = 3
 var spawnTimer = 0
 var shootCooldown = 0
 
@@ -72,7 +71,7 @@ func _process(delta):
 	if spawnTimer <= 0:
 		$EnemyList.add_child(enemies[global.num_enemies_spawned])
 		global.num_enemies_spawned += 1
-		spawnTimer = spawnTimerMax
+		spawnTimer = global.spawnTimerMax
 	else:
 		spawnTimer -= delta
 	

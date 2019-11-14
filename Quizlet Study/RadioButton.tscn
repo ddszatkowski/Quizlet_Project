@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://CheckBox.gd" type="Script" id=1]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CheckBox" type="CheckBox" parent="."]
+margin_right = 24.0
+margin_bottom = 24.0
+script = ExtResource( 1 )
+[connection signal="toggled" from="CheckBox" to="CheckBox" method="_on_RadioButton_toggled"]
