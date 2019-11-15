@@ -5,10 +5,10 @@ onready var red_button = get_tree().get_root().get_node("Game/RedButton")
 onready var blue_button = get_tree().get_root().get_node("Game/BlueButton")
 onready var green_button = get_tree().get_root().get_node("Game/GreenButton")
 onready var purple_button = get_tree().get_root().get_node("Game/PurpleButton")
-onready var red_button_display = get_tree().get_root().get_node("Game/RedButtonLabel")
-onready var blue_button_display = get_tree().get_root().get_node("Game/BlueButtonLabel")
-onready var green_button_display = get_tree().get_root().get_node("Game/GreenButtonLabel")
-onready var purple_button_display = get_tree().get_root().get_node("Game/PurpleButtonLabel")
+onready var red_button_display = red_button.get_children()[0]
+onready var blue_button_display = blue_button.get_children()[0]
+onready var green_button_display = green_button.get_children()[0]
+onready var purple_button_display = purple_button.get_children()[0]
 onready var target = get_tree().get_root().get_node("Game/")
 onready var left_turret = get_tree().get_root().get_node("Game/LeftTurret")
 onready var left_turret_muzzle = get_tree().get_root().get_node("Game/LeftTurret/Muzzle")
@@ -184,10 +184,10 @@ func _on_Area2D_area_entered(area):
 				get_tree().change_scene("res://Scenes/GameOver.tscn")
 			# Resets the labels and deactivated the buttons until another ship is selected
 			question_display.changeMessage("NO TARGET SELECTED")
-			red_button_display.update_text("")
-			blue_button_display.update_text("")
-			green_button_display.update_text("")
-			purple_button_display.update_text("")
+			red_button_display.text = ""
+			blue_button_display.text = ""
+			green_button_display.text = ""
+			purple_button_display.text = ""
 			red_button.disabled = true
 			blue_button.disabled = true
 			green_button.disabled = true
@@ -226,12 +226,15 @@ func _on_Area2D_input_event(viewport, event, shape_idx):
 			# Update display to show question
 			question_display.changeMessage(question)
 			# Update display of buttons to show potential answers
-			red_button_display.update_text(answers_array[0])
-			blue_button_display.update_text(answers_array[1])
-			green_button_display.update_text(answers_array[2])
-			purple_button_display.update_text(answers_array[3])
+			red_button.set_display(answers_array[0])
+			blue_button.set_display(answers_array[1])
+			green_button.set_display(answers_array[2])
+			purple_button.set_display(answers_array[3])
 			red_button.disabled = false
 			blue_button.disabled = false
 			green_button.disabled = false
 			purple_button.disabled = false
 			return
+			
+			
+
