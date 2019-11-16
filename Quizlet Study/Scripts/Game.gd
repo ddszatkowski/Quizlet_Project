@@ -20,6 +20,8 @@ var color = "Red"
 var spawnTimer = 0
 var shootCooldown = 0
 
+var gun_strength = 10
+
 
 func _ready():
 	# In scope temp variables
@@ -90,9 +92,9 @@ func _input(event):
 		return
 	if Input.is_action_pressed("Click") and shootCooldown <= 0:
 		var temp = laser.instance()
-		temp.init($LeftTurret.position + Vector2(-50, -150), get_global_mouse_position(), color, true)
+		temp.init($LeftTurret.position + Vector2(-50, -150), get_global_mouse_position(), color, true, gun_strength/2)
 		$lasers_good.add_child(temp)
 		temp = laser.instance()
-		temp.init($RightTurret.position + Vector2(-400, -150), get_global_mouse_position(), color, true)
+		temp.init($RightTurret.position + Vector2(-400, -150), get_global_mouse_position(), color, true, gun_strength/2)
 		$lasers_good.add_child(temp)
 		shootCooldown = .5

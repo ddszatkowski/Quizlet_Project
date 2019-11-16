@@ -9,7 +9,6 @@ onready var red_button_display = red_button.get_children()[0]
 onready var blue_button_display = blue_button.get_children()[0]
 onready var green_button_display = green_button.get_children()[0]
 onready var purple_button_display = purple_button.get_children()[0]
-onready var target = get_tree().get_root().get_node("Game/")
 onready var left_turret = get_tree().get_root().get_node("Game/LeftTurret")
 onready var left_turret_muzzle = get_tree().get_root().get_node("Game/LeftTurret/Muzzle")
 onready var laser = preload("res://Scenes/Laser.tscn")
@@ -141,16 +140,15 @@ func _process(delta):
 				shootLaser()
 				$AnimatedSprite.animation = "Charge0"
 				shoot_wait = shoot_wait_max
-				target.take_damage(strength)
 			shoot_wait -= delta
 		
 # Spawn lasers at ship cannons, move them to absolute coordinates at bottom of screen
 func shootLaser():
 	var temp = laser.instance()
-	temp.init(position + Vector2(-30, 20), Vector2(x_min, 2*y_max), "Red", false)
+	temp.init(position + Vector2(-30, 20), Vector2(x_min, 2*y_max), "Red", false, strength/2)
 	get_parent().get_parent().get_node("lasers_bad").add_child(temp)
 	temp = laser.instance()
-	temp.init(position + Vector2(30, 20), Vector2(x_max, 2*y_max), "Red", false)
+	temp.init(position + Vector2(30, 20), Vector2(x_max, 2*y_max), "Red", false, strength/2)
 	get_parent().get_parent().get_node("lasers_bad").add_child(temp)
 
 # If received selected signal from another enemy, hide selection cursor
@@ -203,8 +201,9 @@ func _on_Area2D_area_entered(area):
 		elif correct_answer_index != index_pressed and is_selected:
 			shielding_or_dying = true
 			$ShieldAnimation.show()
-			get_parent().remove_child(collide)
-			collide.queue_free()
+			collide.reflect()
+			#get_parent().remove_child(collide)
+			#collide.queue_free()
 			yield(get_tree().create_timer(.3), "timeout")
 			$ShieldAnimation.hide()
 			shielding_or_dying = false
