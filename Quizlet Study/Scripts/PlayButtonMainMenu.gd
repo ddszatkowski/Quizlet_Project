@@ -1,7 +1,6 @@
-extends TextureButton
+extends Button
 
-# Move to import if no saved sets, otherwise move to select
-func _on_PlayMainMenu_pressed():
+func _on_PlayButton_pressed():
 	var save_game = File.new()
 	var save_dict = {}
 	if(save_game.file_exists("res://savegame.json")):

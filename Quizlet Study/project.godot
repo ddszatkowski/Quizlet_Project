@@ -27,6 +27,8 @@ global="*res://Scripts/global.gd"
 
 window/size/width=1920
 window/size/height=1080
+window/size/resizable=false
+window/size/fullscreen=true
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 

@@ -1,4 +1,5 @@
-extends TextureButton
+extends Button
 
-func _on_Options_pressed():
+
+func _on_OptionsButton_pressed():
 	get_tree().change_scene("res://Scenes/OptionsMenu.tscn")
