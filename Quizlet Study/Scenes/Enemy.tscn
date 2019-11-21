@@ -1,14 +1,14 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Scripts/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/enemy_basic_charging_1.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/enemy_basic_charging_3.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/explosion1.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/explosion2.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/explosion3.png" type="Texture" id=6]
-[ext_resource path="res://Sprites/explosion4.png" type="Texture" id=7]
-[ext_resource path="res://Sprites/enemy_basic_l.png" type="Texture" id=8]
-[ext_resource path="res://Sprites/enemy_basic_charging_2.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/explosion1.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/explosion2.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/explosion3.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/explosion4.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/enemy_basic_l.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/enemy_basic_charging_2.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/enemy_basic_charging_3.png" type="Texture" id=9]
 [ext_resource path="res://Sprites/enemy_basic_f.png" type="Texture" id=10]
 [ext_resource path="res://Sprites/selected.png" type="Texture" id=11]
 [ext_resource path="res://Sprites/shields1.png" type="Texture" id=12]
@@ -19,6 +19,8 @@
 [ext_resource path="res://Sprites/shields6.png" type="Texture" id=17]
 [ext_resource path="res://Sprites/shields7.png" type="Texture" id=18]
 [ext_resource path="res://Sprites/shields8.png" type="Texture" id=19]
+[ext_resource path="res://Sounds/explosions/6.wav" type="AudioStream" id=20]
+[ext_resource path="res://Sounds/lasers/6.wav" type="AudioStream" id=21]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -27,24 +29,24 @@ animations = [ {
 "name": "Charge1",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 3 ) ],
-"loop": true,
-"name": "Charge3",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
 "loop": false,
 "name": "Explosion",
 "speed": 11.0
 }, {
-"frames": [ ExtResource( 8 ) ],
+"frames": [ ExtResource( 7 ) ],
 "loop": true,
 "name": "Dodging",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 9 ) ],
+"frames": [ ExtResource( 8 ) ],
 "loop": true,
 "name": "Charge2",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ) ],
+"loop": true,
+"name": "Charge3",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 10 ) ],
@@ -88,6 +90,16 @@ shape = SubResource( 2 )
 [node name="ShieldAnimation" type="AnimatedSprite" parent="."]
 frames = SubResource( 3 )
 animation = "ShieldReflect"
+frame = 6
 playing = true
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="ExplosionSound" type="AudioStreamPlayer2D" parent="Sounds"]
+position = Vector2( 490.798, 636.181 )
+stream = ExtResource( 20 )
+
+[node name="ShieldSound" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource( 21 )
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
 [connection signal="input_event" from="Area2D" to="." method="_on_Area2D_input_event"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/space.jpg" type="Texture" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://Sprites/blue_laser.png" type="Texture" id=20]
 [ext_resource path="res://Scripts/Pause.gd" type="Script" id=21]
 [ext_resource path="res://Pause_Menu_Font..tres" type="DynamicFont" id=22]
+[ext_resource path="res://Sounds/lasers/7.wav" type="AudioStream" id=23]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 10 )
@@ -332,6 +333,11 @@ margin_right = 74.5001
 margin_bottom = -47.5
 custom_fonts/font = ExtResource( 22 )
 text = "Paused"
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="LaserFired" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 23 )
 [connection signal="toggled" from="BlueButton" to="." method="_on_BlueButton_toggled"]
 [connection signal="toggled" from="GreenButton" to="." method="_on_GreenButton_toggled"]
 [connection signal="toggled" from="PurpleButton" to="." method="_on_PurpleButton_toggled"]

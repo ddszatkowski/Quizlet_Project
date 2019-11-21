@@ -24,7 +24,7 @@ var gun_strength = 10
 
 
 func _ready():
-	# In scope temp variables
+	
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	var answers = []
@@ -91,6 +91,8 @@ func _input(event):
 	if not ($RedButton.pressed or $BlueButton.pressed or $GreenButton.pressed or $PurpleButton.pressed):
 		return
 	if Input.is_action_pressed("Click") and shootCooldown <= 0:
+		var soundNode = $"Sounds/LaserFired"
+		soundNode.play()
 		var temp = laser.instance()
 		temp.init($LeftTurret.position + Vector2(-50, -150), get_global_mouse_position(), color, true, gun_strength/2)
 		$lasers_good.add_child(temp)

@@ -193,6 +193,8 @@ func _on_Area2D_area_entered(area):
 			#Explosion animation
 			$AnimatedSprite.set_scale(Vector2(2, 2))
 			$AnimatedSprite.play("Explosion")
+			var soundNode = $"Sounds/ExplosionSound"
+			soundNode.play()
 			get_parent().remove_child(collide)
 			collide.queue_free()
 			yield(get_tree().create_timer(.3), "timeout")
@@ -202,6 +204,8 @@ func _on_Area2D_area_entered(area):
 			shielding_or_dying = true
 			$ShieldAnimation.show()
 			collide.reflect()
+			var soundNode = $"Sounds/ShieldSound"
+			soundNode.play()
 			#get_parent().remove_child(collide)
 			#collide.queue_free()
 			yield(get_tree().create_timer(.3), "timeout")
