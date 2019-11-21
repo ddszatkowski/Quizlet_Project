@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/10 Arpanauts.wav-0a7dc86e12414677556769afca8bb11a.sample"
+
+[deps]
+
+source_file="res://Sounds/Eric Skiff - Resistor Anthems/10 Arpanauts.wav"
+dest_files=[ "res://.import/10 Arpanauts.wav-0a7dc86e12414677556769afca8bb11a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
