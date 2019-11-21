@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/16 We're all under the stars.wav-de920ca6126a024b7c4df0ea4cf0110a.sample"
+
+[deps]
+
+source_file="res://Sounds/Eric Skiff - Resistor Anthems/16 We're all under the stars.wav"
+dest_files=[ "res://.import/16 We're all under the stars.wav-de920ca6126a024b7c4df0ea4cf0110a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
