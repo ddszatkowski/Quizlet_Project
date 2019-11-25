@@ -1,4 +1,4 @@
-extends TextureButton
+extends Button
 var optionButton = OptionButton
 onready var global = get_node("/root/global")
 

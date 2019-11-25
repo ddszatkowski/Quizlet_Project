@@ -1,4 +1,4 @@
-extends TextureButton
+extends Button
 
 func _on_Return_pressed():
-	get_tree().change_scene("res://Scenes/ImportMenu.tscn")
+	get_tree().change_scene("res://Scenes/SelectMenu.tscn")
