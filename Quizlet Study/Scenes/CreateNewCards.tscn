@@ -1,0 +1,58 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Sprites/SpaceBackground.jpg" type="Texture" id=1]
+[ext_resource path="res://Guardians - Button Font Option 1.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Scenes/BackToImport.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 25
+font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[sub_resource type="StyleBoxEmpty" id=6]
+
+[sub_resource type="DynamicFont" id=7]
+size = 75
+font_data = ExtResource( 2 )
+
+[node name="Node2D" type="Node2D"]
+position = Vector2( -7.58966, 7.58954 )
+scale = Vector2( 1.412, 1.274 )
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 671.097, 629.836 )
+texture = ExtResource( 1 )
+offset = Vector2( -13.8713, -171.668 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 276.619
+margin_top = 314.729
+margin_right = 1164.62
+margin_bottom = 359.729
+custom_fonts/font = SubResource( 1 )
+text = "Create New Cards Through Filling in title
+Of the card Set and separating answers 
+and questions with commas and each card 
+with a semicolon. Thanks!!"
+
+[node name="BackToImport" type="Button" parent="."]
+margin_left = 32.835
+margin_top = 26.6873
+margin_right = 359.835
+margin_bottom = 136.687
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/disabled = SubResource( 5 )
+custom_styles/normal = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
+text = "Back"
+script = ExtResource( 3 )
+[connection signal="pressed" from="BackToImport" to="BackToImport" method="_on_Back_pressed"]
