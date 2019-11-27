@@ -23,8 +23,10 @@ func _on_Button_pressed():
 	var child = get_node("CardText")
 	var textChild = child.called()
 	var childAvailable = true
+	var count = 0
 	while(childAvailable):
 		index = textChild.findn(';')
+		count = count+1
 		var wordStr = String(textChild.substr(0, index))
 		textChild = textChild.substr(index + 1, textChild.length())
 		
@@ -42,12 +44,12 @@ func _on_Button_pressed():
 		set_dict[defStr] = wordStr
 	
 	# Save set to whole file under title
-	save_dict[title] = set_dict
-	print(set_dict)
+	if(count > 4):
+		save_dict[title] = set_dict
+		print(set_dict)
 
-	save_game.open("res://savegame.json", File.WRITE)
-	save_game.store_line(to_json(save_dict))
-	save_game.close()
-# warning-ignore:return_value_discarded
-	get_tree().change_scene("res://Scenes/ImportMenu.tscn")
+		save_game.open("res://savegame.json", File.WRITE)
+		save_game.store_line(to_json(save_dict))
+		save_game.close()
+		get_tree().change_scene("res://Scenes/ImportMenu.tscn")
 

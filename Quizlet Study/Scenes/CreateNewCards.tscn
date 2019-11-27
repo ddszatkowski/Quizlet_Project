@@ -46,17 +46,19 @@ texture = ExtResource( 1 )
 offset = Vector2( -13.8713, -171.668 )
 
 [node name="Label" type="Label" parent="."]
-margin_left = 279.523
-margin_top = 219.767
-margin_right = 1320.52
-margin_bottom = 450.767
+margin_left = 222.887
+margin_top = 176.309
+margin_right = 1271.89
+margin_bottom = 485.309
 custom_fonts/font = SubResource( 1 )
 text = "Create New Cards Through Filling in title
 Of the card Set and separating answers 
 and questions with commas and each card 
-with a semicolon. Please put no spaces 
-between a commas and next section or each
-card"
+with a semicolon. additionally please enter 
+at least 4 cards. Otherwise you will remain
+Here until 4 are entered or
+you hit back"
+align = 1
 
 [node name="BackToImport" type="Button" parent="."]
 margin_left = 32.835
