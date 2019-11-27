@@ -44,9 +44,23 @@ var shoot_wait = charge_steps[0]
 var shoot_wait_max = 10
 
 
+func change_color(color):
+	var frames = SpriteFrames.new()
+	var animations = ["f", "l", "charge1", "charge2", "charge3"]
+	for animation in animations:
+		var img = Image.new()
+		img.load("Sprites/enemy" + color + "_" + animation + ".png")
+		var itex = ImageTexture.new()
+		itex.create_from_image(img)
+		frames.add_animation(animation)
+		frames.add_frame(animation, itex)
+	$AnimatedSprite.set_sprite_frames(frames)
+	
+		
 # Should be called when enemy is spawned. 
 # Stores question and connects signals to all other enemies
-func init(enemies, q, a, a_id):
+func init(enemies, q, a, a_id, color):
+	change_color(color)
 	question = q
 	answers_array = a
 	correct_answer_index = a_id
@@ -123,22 +137,22 @@ func _process(delta):
 			
 			# Flip sprite based on direction
 			$AnimatedSprite.flip_h = velocity.x > 0
-			$AnimatedSprite.animation = "Dodging"
+			$AnimatedSprite.animation = "l"
 			
 		else:
 			# Change sprite based on level of charge
 			if shoot_wait > charge_steps[1]:
-				$AnimatedSprite.animation = "Charge0"
+				$AnimatedSprite.animation = "f"
 			elif shoot_wait > charge_steps[2]:
-				$AnimatedSprite.animation = "Charge1"
+				$AnimatedSprite.animation = "charge1"
 			elif shoot_wait > charge_steps[3]:
-				$AnimatedSprite.animation = "Charge2"
+				$AnimatedSprite.animation = "charge2"
 			elif shoot_wait > 0:
-				$AnimatedSprite.animation = "Charge3"
+				$AnimatedSprite.animation = "charge3"
 			# If finished, shoot lasers
 			else:
 				shootLaser()
-				$AnimatedSprite.animation = "Charge0"
+				$AnimatedSprite.animation = "f"
 				shoot_wait = shoot_wait_max
 			shoot_wait -= delta
 		

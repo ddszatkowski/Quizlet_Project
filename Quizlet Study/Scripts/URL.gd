@@ -41,6 +41,15 @@ func _on_HTTPRequest_request_completed( result, response_code, headers, body ):
 		if defStr != "" and defStr.findn("html lang") == -1:
 			set_dict[defStr] = wordStr
 	
+	if len(set_dict) < 4:
+		$ResultText.text = "Error: Card set is invalid or less than 4 cards long"
+		$ResultText.display()
+		return
+	else:
+		$ResultText.text = title + " Successfully imported!"
+		$ResultText.display()
+		
+	
 	# Save set to whole file under title
 	save_dict[title] = set_dict
 

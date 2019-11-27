@@ -22,6 +22,9 @@ var shootCooldown = 0
 
 var gun_strength = 10
 
+var colors = ['R', 'B', 'P', 'Y', 'T', 'G']
+var color_ind = 0#randi()%len(colors)
+
 
 func _ready():
 	
@@ -62,8 +65,11 @@ func _ready():
 
 # Declare new enemy, call initialization and add to this node as child
 func add_enemy(question, answers, correct_answer_id):
+	color_ind += 1
+	if color_ind == len(colors):
+		color_ind = 0
 	var temp = enemy.instance()
-	enemies = temp.init(enemies, question, answers, correct_answer_id)
+	enemies = temp.init(enemies, question, answers, correct_answer_id, colors[color_ind])
 	
 func _process(delta):
 	if shootCooldown > 0:
