@@ -6,6 +6,7 @@ onready var select = preload("res://Scenes/SelectMenu.tscn")
 onready var laser = preload("res://Scenes/Laser.tscn")
 # Get global variables, such as selected card set names
 onready var global = get_node("/root/global")
+onready var reticle = preload("res://Sprites/attack_reticle.png")
 # This is the shield bar we need to change for health being lost
 onready var bar = $TextureProgress
 # List of spawned enemies
@@ -25,6 +26,7 @@ var gun_strength = 10
 var colors = ['R', 'B', 'P', 'Y', 'T', 'G']
 var color_ind = randi()%len(colors)
 
+var mouse_is_reticle = false
 
 func _ready():
 	
@@ -62,6 +64,7 @@ func _ready():
 	$BlueButton.color = "Blue"
 	$GreenButton.color = "Green"
 	$PurpleButton.color = "Purple"
+	
 
 # Declare new enemy, call initialization and add to this node as child
 func add_enemy(question, answers, correct_answer_id):
@@ -72,6 +75,15 @@ func add_enemy(question, answers, correct_answer_id):
 	enemies = temp.init(enemies, question, answers, correct_answer_id, colors[color_ind])
 	
 func _process(delta):
+	var mouseY = get_global_mouse_position().y
+	if mouse_is_reticle and (mouseY > 850 or mouseY < 250):
+		Input.set_custom_mouse_cursor(null)
+		mouse_is_reticle = false
+	if not mouse_is_reticle and (250 < mouseY and mouseY < 850):
+		Input.set_custom_mouse_cursor(reticle, 0, Vector2(20,20))
+		mouse_is_reticle = true
+	
+	
 	if shootCooldown > 0:
 		shootCooldown -= delta
 	if global.num_enemies_spawned == len(enemies):
@@ -99,7 +111,7 @@ func take_damage(count):
 func _input(event):
 	if not ($RedButton.pressed or $BlueButton.pressed or $GreenButton.pressed or $PurpleButton.pressed):
 		return
-	if Input.is_action_pressed("Click") and shootCooldown <= 0:
+	if Input.is_action_pressed("Click") and shootCooldown <= 0 and mouse_is_reticle:
 		var soundNode = $"Sounds/LaserFired"
 		soundNode.play()
 		var temp = laser.instance()

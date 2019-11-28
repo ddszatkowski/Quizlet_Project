@@ -45,14 +45,14 @@ var shoot_wait_max = 10
 
 
 func change_color(color):
-	var frames = SpriteFrames.new()
+	var frames = $AnimatedSprite.get_sprite_frames().duplicate()
 	var animations = ["f", "l", "charge1", "charge2", "charge3"]
 	for animation in animations:
 		var img = Image.new()
 		img.load("Sprites/enemy" + color + "_" + animation + ".png")
 		var itex = ImageTexture.new()
 		itex.create_from_image(img)
-		frames.add_animation(animation)
+		frames.clear(animation)
 		frames.add_frame(animation, itex)
 	$AnimatedSprite.set_sprite_frames(frames)
 	
