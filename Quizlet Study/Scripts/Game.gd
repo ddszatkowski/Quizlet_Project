@@ -23,7 +23,7 @@ var shootCooldown = 0
 var gun_strength = 10
 
 var colors = ['R', 'B', 'P', 'Y', 'T', 'G']
-var color_ind = 0#randi()%len(colors)
+var color_ind = randi()%len(colors)
 
 
 func _ready():
@@ -77,7 +77,10 @@ func _process(delta):
 	if global.num_enemies_spawned == len(enemies):
 		return
 	if spawnTimer <= 0:
-		$EnemyList.add_child(enemies[global.num_enemies_spawned])
+		randomize()
+		var rand_enemy = randi()%len(enemies)
+		$EnemyList.add_child(enemies[rand_enemy])
+		enemies.remove(rand_enemy)
 		global.num_enemies_spawned += 1
 		spawnTimer = global.spawnTimerMax
 	else:
