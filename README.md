@@ -1,6 +1,7 @@
 # Astro Blaster: A Quizlet Companion Study App
 
-This Project is being made using GoDot engine. We chose to use this application because it has extensive tools and capabilities along with being completely open-source. 
+This Project is being made using GoDot engine. We chose to use this application because it has extensive tools and capabilities along with being completely open-source.
+
 Link: https://godotengine.org/
 
 Asset information:
