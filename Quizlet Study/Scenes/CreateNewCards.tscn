@@ -23,7 +23,7 @@ font_data = ExtResource( 2 )
 [sub_resource type="StyleBoxEmpty" id=6]
 
 [sub_resource type="DynamicFont" id=7]
-size = 75
+size = 60
 font_data = ExtResource( 2 )
 
 [sub_resource type="StyleBoxEmpty" id=8]
@@ -41,30 +41,25 @@ position = Vector2( -7.58966, 7.58954 )
 scale = Vector2( 1.412, 1.274 )
 
 [node name="Background" type="Sprite" parent="."]
-position = Vector2( 1458.7, 1063.72 )
+position = Vector2( 797.345, 696.437 )
 texture = ExtResource( 1 )
 offset = Vector2( -13.8713, -171.668 )
 
 [node name="Label" type="Label" parent="."]
-margin_left = 222.887
-margin_top = 176.309
-margin_right = 1271.89
-margin_bottom = 485.309
+margin_left = 216.851
+margin_top = 214.488
+margin_right = 1190.85
+margin_bottom = 438.488
 custom_fonts/font = SubResource( 1 )
-text = "Create New Cards Through Filling in title
-Of the card Set and separating answers 
-and questions with commas and each card 
-with a semicolon. additionally please enter 
-at least 4 cards. Otherwise you will remain
-Here until 4 are entered or
-you hit back"
+text = "Create a New Card set by Filling in title and card sections. Separate answers and questions with commas and each card answer combo with a semicolon. Must have minimum of 4 cards."
 align = 1
+autowrap = true
 
 [node name="BackToImport" type="Button" parent="."]
-margin_left = 32.835
-margin_top = 26.6873
-margin_right = 359.835
-margin_bottom = 136.687
+margin_left = 35.31
+margin_top = 32.1203
+margin_right = 287.31
+margin_bottom = 142.12
 custom_styles/hover = SubResource( 2 )
 custom_styles/pressed = SubResource( 3 )
 custom_styles/focus = SubResource( 4 )
@@ -75,10 +70,10 @@ text = "Back"
 script = ExtResource( 3 )
 
 [node name="NameOfSet" type="LineEdit" parent="."]
-margin_left = 417.739
-margin_top = 502.543
-margin_right = 1083.74
-margin_bottom = 559.543
+margin_left = 355.651
+margin_top = 483.776
+margin_right = 1021.65
+margin_bottom = 540.776
 focus_mode = 1
 custom_styles/read_only = ExtResource( 4 )
 custom_styles/focus = ExtResource( 4 )
@@ -104,10 +99,10 @@ placeholder_text = "Your Cards"
 script = ExtResource( 7 )
 
 [node name="Button" type="Button" parent="NameOfSet"]
-margin_left = 264.236
-margin_top = 256.028
-margin_right = 449.236
-margin_bottom = 313.028
+margin_left = 245.421
+margin_top = 258.113
+margin_right = 430.421
+margin_bottom = 315.113
 rect_pivot_offset = Vector2( 175.578, 240.561 )
 custom_styles/hover = SubResource( 8 )
 custom_styles/pressed = SubResource( 9 )

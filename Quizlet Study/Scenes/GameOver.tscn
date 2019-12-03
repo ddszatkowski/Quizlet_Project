@@ -45,7 +45,7 @@ position = Vector2( -8.53966, 7.58954 )
 scale = Vector2( 1.462, 1.234 )
 
 [node name="Background" type="Sprite" parent="."]
-position = Vector2( 1230.79, 447.324 )
+position = Vector2( 1281.11, 359.891 )
 texture = ExtResource( 1 )
 
 [node name="GameOverMessage" type="RichTextLabel" parent="."]
