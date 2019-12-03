@@ -1,25 +1,13 @@
-# Name TBD: Quizlet Study Game
+# Astro Blaster: A Quizlet Companion Study App
 
-This Project is being made using GoDot engine. 
+This Project is being made using GoDot engine. We chose to use this application because it has extensive tools and capabilities along with being completely open-source. 
 Link: https://godotengine.org/
 
-We chose to use this application because it has extensive tools and capabilities along with being completely open-source and free. 
+Asset information:
+All of the art, font, and sounds found in this project are open source / free to use for non commercial purposes. For this to be safe to distribute without legal reprocusions we need to switch out HTML scrapping of the Quizlet pages over to using their API. 
 
-Creators: Patrick Fulps, Beatrice Madison, Joelle Frye, and David Szatkowski
+Application Disclaimer:
+This application while it is a study companion makes no promisses on the safety of the content that could be found on the Quizlet site, or any garantee on the effectiveness of our app to facilitate learning. 
 
-
-Presentation 2: 8 minutes
-
-- Show demo first with all current features
-- Talk about what we need to work on next (listed below)
-- Talk about being able to finish by December
-- Feedback on games current state thus far by other???
-- Questions
-
-
-List of things we plan to have done by end of semester:
-- Improved menus and sprites
-- Fix minor oddities
-- Explosion animation for destroyed enemies when they are killed
-- Way to create card sets yourself in app
-- Create options menu
+Creators: Patrick Fulps, Beatrice Madison, Joelle Frye, and David Szatkowski.
+For questions feel free to reach out to us. 
