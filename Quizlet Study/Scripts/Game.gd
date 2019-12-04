@@ -85,7 +85,7 @@ func _process(delta):
 	
 	if shootCooldown > 0:
 		shootCooldown -= delta
-	if global.num_enemies_spawned == len(enemies):
+	if len(enemies) == 0:
 		return
 	if spawnTimer <= 0:
 		randomize()
