@@ -1,11 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Sounds/Eric Skiff - Resistor Anthems/08 Ascending.wav" type="AudioStream" id=1]
-[ext_resource path="res://Scenes/Music.gd" type="Script" id=2]
+[ext_resource path="res://Sounds/Eric Skiff - Resistor Anthems/02 Underclocked (underunderclocked mix)ed mix).wav" type="AudioStream" id=1]
 
 [node name="Music" type="AudioStreamPlayer"]
 pause_mode = 2
 stream = ExtResource( 1 )
 volume_db = -11.645
 autoplay = true
-script = ExtResource( 2 )

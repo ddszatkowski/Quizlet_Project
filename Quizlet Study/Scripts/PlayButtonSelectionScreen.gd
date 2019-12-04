@@ -2,7 +2,7 @@ extends Button
 
 # Retrieve List and global variables
 onready var itemList = get_node("/root/Node2D/CardSetList")
-
+onready var global = get_node("/root/global")
 # Define list of card set names
 var nameList = []
 

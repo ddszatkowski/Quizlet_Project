@@ -83,7 +83,7 @@ func _process(delta):
 		scaleVar.x = (end_scale - start_scale) * dist_covered/tot_dist + start_scale
 		position = positionVar
 		if position.y > 1500:
-			player_ship.take_damage(laser_strength)
+			player_ship.take_damage()
 			get_parent().remove_child(self)
 			
 		

@@ -7,16 +7,16 @@ onready var laser = preload("res://Scenes/Laser.tscn")
 # Get global variables, such as selected card set names
 onready var global = get_node("/root/global")
 onready var reticle = preload("res://Sprites/attack_reticle.png")
-# This is the shield bar we need to change for health being lost
-onready var bar = $TextureProgress
+
+# Only lower healthbar on every other hit
+var ignore_damage = true
+
 # List of spawned enemies
 var enemies = []
 var group
 # All selected card sets, merged
 var card_dict
 var Mouse_Position
-#health
-onready var health = 100
 var color = "Red"
 var spawnTimer = 0
 var shootCooldown = 0
@@ -29,13 +29,11 @@ var color_ind = randi()%len(colors)
 var mouse_is_reticle = false
 
 func _ready():
-	
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	var answers = []
 	var index = 0
 	var rand_num
-	var health = 100
 	card_dict = global.cardSet
 	# Adds all the answers to an array
 	for question in card_dict:
@@ -56,15 +54,17 @@ func _ready():
 	# Setting the total number of enemies to be the number of cards for now
 	global.num_enemies_left = len(card_dict)
 	global.num_enemies_spawned = 0
-	var player_max_health = 100
-	bar.max_value = player_max_health
-	bar.value = player_max_health
 	
 	$RedButton.color = "Red"
 	$BlueButton.color = "Blue"
 	$GreenButton.color = "Green"
 	$PurpleButton.color = "Purple"
 	
+
+func take_damage():
+	if not ignore_damage:
+		$Healthbar.damage()
+	ignore_damage = not ignore_damage
 
 # Declare new enemy, call initialization and add to this node as child
 func add_enemy(question, answers, correct_answer_id):
@@ -97,16 +97,6 @@ func _process(delta):
 		spawnTimer = global.spawnTimerMax
 	else:
 		spawnTimer -= delta
-	
-func update_health(new_value):
-	bar.value = new_value
-
-func take_damage(count):
-	health = health - count
-	if health <= 0:
-		health = 0
-		get_tree().change_scene("res://Scenes/GameOver.tscn")
-	update_health(health)
 	
 func _input(event):
 	if not ($RedButton.pressed or $BlueButton.pressed or $GreenButton.pressed or $PurpleButton.pressed):
