@@ -60,7 +60,6 @@ func _ready():
 	$GreenButton.color = "Green"
 	$PurpleButton.color = "Purple"
 	
-
 func take_damage():
 	if not ignore_damage:
 		$Healthbar.damage()
