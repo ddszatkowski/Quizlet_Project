@@ -8,7 +8,7 @@ onready var laser = preload("res://Scenes/Laser.tscn")
 onready var global = get_node("/root/global")
 onready var reticle = preload("res://Sprites/attack_reticle.png")
 
-# Only lower healthbar on every other hit
+# Only lower healthbar on every other hit, can be hit / get 20 questions wrong on normal mode
 var ignore_damage = true
 
 # List of spawned enemies
@@ -81,7 +81,6 @@ func _process(delta):
 	if not mouse_is_reticle and (250 < mouseY and mouseY < 850):
 		Input.set_custom_mouse_cursor(reticle, 0, Vector2(20,20))
 		mouse_is_reticle = true
-	
 	
 	if shootCooldown > 0:
 		shootCooldown -= delta

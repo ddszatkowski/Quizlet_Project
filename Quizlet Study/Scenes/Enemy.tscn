@@ -91,7 +91,6 @@ shape = SubResource( 2 )
 [node name="ShieldAnimation" type="AnimatedSprite" parent="."]
 frames = SubResource( 3 )
 animation = "ShieldReflect"
-frame = 1
 playing = true
 
 [node name="Sounds" type="Node" parent="."]

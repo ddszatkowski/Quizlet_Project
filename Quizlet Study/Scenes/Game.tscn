@@ -24,8 +24,8 @@
 [ext_resource path="res://Sounds/lasers/7.wav" type="AudioStream" id=22]
 [ext_resource path="res://Sprites/healthbar.png" type="Texture" id=23]
 [ext_resource path="res://Scenes/Healthbar.gd" type="Script" id=24]
-[ext_resource path="res://Sprites/health_low.png" type="Texture" id=25]
-[ext_resource path="res://Sprites/health_high.png" type="Texture" id=26]
+[ext_resource path="res://Sprites/health_high.png" type="Texture" id=25]
+[ext_resource path="res://Sprites/health_low.png" type="Texture" id=26]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 10 )
@@ -59,18 +59,18 @@ font_data = ExtResource( 18 )
 [sub_resource type="Theme" id=10]
 default_font = SubResource( 9 )
 
-[sub_resource type="Theme" id=12]
+[sub_resource type="Theme" id=11]
 
-[sub_resource type="SpriteFrames" id=13]
+[sub_resource type="SpriteFrames" id=12]
 animations = [ {
 "frames": [ ExtResource( 25 ) ],
 "loop": true,
-"name": "Empty",
+"name": "Full",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 26 ) ],
 "loop": true,
-"name": "Full",
+"name": "Empty",
 "speed": 5.0
 } ]
 
@@ -316,7 +316,7 @@ margin_left = -129.0
 margin_top = 4.5
 margin_right = 129.0
 margin_bottom = 81.5
-theme = SubResource( 12 )
+theme = SubResource( 11 )
 custom_fonts/font = ExtResource( 21 )
 text = "Main Menu"
 
@@ -348,52 +348,52 @@ script = ExtResource( 24 )
 
 [node name="bar1" type="AnimatedSprite" parent="Healthbar"]
 position = Vector2( 33, 735 )
-frames = SubResource( 13 )
+frames = SubResource( 12 )
 animation = "Full"
 
 [node name="bar2" type="AnimatedSprite" parent="Healthbar"]
 position = Vector2( 33, 660 )
-frames = SubResource( 13 )
+frames = SubResource( 12 )
 animation = "Full"
 
 [node name="bar3" type="AnimatedSprite" parent="Healthbar"]
 position = Vector2( 33, 585 )
-frames = SubResource( 13 )
+frames = SubResource( 12 )
 animation = "Full"
 
 [node name="bar4" type="AnimatedSprite" parent="Healthbar"]
 position = Vector2( 33, 510 )
-frames = SubResource( 13 )
+frames = SubResource( 12 )
 animation = "Full"
 
 [node name="bar5" type="AnimatedSprite" parent="Healthbar"]
 position = Vector2( 33, 435 )
-frames = SubResource( 13 )
+frames = SubResource( 12 )
 animation = "Full"
 
 [node name="bar6" type="AnimatedSprite" parent="Healthbar"]
 position = Vector2( 33, 360 )
-frames = SubResource( 13 )
+frames = SubResource( 12 )
 animation = "Full"
 
 [node name="bar7" type="AnimatedSprite" parent="Healthbar"]
 position = Vector2( 33, 285 )
-frames = SubResource( 13 )
+frames = SubResource( 12 )
 animation = "Full"
 
 [node name="bar8" type="AnimatedSprite" parent="Healthbar"]
 position = Vector2( 33, 210 )
-frames = SubResource( 13 )
+frames = SubResource( 12 )
 animation = "Full"
 
 [node name="bar9" type="AnimatedSprite" parent="Healthbar"]
 position = Vector2( 33, 135 )
-frames = SubResource( 13 )
+frames = SubResource( 12 )
 animation = "Full"
 
 [node name="bar10" type="AnimatedSprite" parent="Healthbar"]
 position = Vector2( 33, 60 )
-frames = SubResource( 13 )
+frames = SubResource( 12 )
 animation = "Full"
 [connection signal="toggled" from="BlueButton" to="." method="_on_BlueButton_toggled"]
 [connection signal="toggled" from="GreenButton" to="." method="_on_GreenButton_toggled"]

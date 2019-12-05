@@ -172,59 +172,60 @@ func _on_Enemy_selected():
 
 # Checks if the lazers hit the ship and if it was the correct answer or not
 func _on_Area2D_area_entered(area):
-	var collide = area.get_parent()
-	if collide.collision_type == "Laser" and collide.friend:
-		# Check if answer is correct
-		# Find which button is pressed
-		var index_pressed = -1
-		for ind in range(0, 4):
-			if buttons[ind].pressed:
-				index_pressed = ind
-				
-		# If correct button pressed, shoot laser and destroy ship
-		if correct_answer_index == index_pressed and is_selected:
-			# Since game is about to kill enemy stop having it move around
-			# Shoot laser at ship
-			shielding_or_dying = true
-			red_button.set_pressed(false)
-			blue_button.set_pressed(false)
-			green_button.set_pressed(false)
-			purple_button.set_pressed(false)
-			# Checks for game over - i.e. all enemies have been killed
-			global.num_enemies_left = global.num_enemies_left - 1
-			if (global.num_enemies_left <= 0):
-				get_tree().change_scene("res://Scenes/GameOver.tscn")
-			# Resets the labels and deactivated the buttons until another ship is selected
-			question_display.changeMessage("NO TARGET SELECTED")
-			red_button_display.text = ""
-			blue_button_display.text = ""
-			green_button_display.text = ""
-			purple_button_display.text = ""
-			red_button.disabled = true
-			blue_button.disabled = true
-			green_button.disabled = true
-			purple_button.disabled = true
-			#Explosion animation
-			$AnimatedSprite.set_scale(Vector2(2, 2))
-			$AnimatedSprite.play("Explosion")
-			var soundNode = $"Sounds/ExplosionSound"
-			soundNode.play()
-			get_parent().remove_child(collide)
-			collide.queue_free()
-			yield(get_tree().create_timer(.3), "timeout")
-			# Deletes enemy
-			self.queue_free()
-		elif correct_answer_index != index_pressed and is_selected:
-			shielding_or_dying = true
-			$ShieldAnimation.show()
-			collide.reflect()
-			var soundNode = $"Sounds/ShieldSound"
-			soundNode.play()
-			#get_parent().remove_child(collide)
-			#collide.queue_free()
-			yield(get_tree().create_timer(.3), "timeout")
-			$ShieldAnimation.hide()
-			shielding_or_dying = false
+	if !shielding_or_dying:
+		var collide = area.get_parent()
+		if collide.collision_type == "Laser" and collide.friend:
+			# Check if answer is correct
+			# Find which button is pressed
+			var index_pressed = -1
+			for ind in range(0, 4):
+				if buttons[ind].pressed:
+					index_pressed = ind
+					
+			# If correct button pressed, shoot laser and destroy ship
+			if correct_answer_index == index_pressed and is_selected:
+				# Since game is about to kill enemy stop having it move around
+				# Shoot laser at ship
+				shielding_or_dying = true
+				red_button.set_pressed(false)
+				blue_button.set_pressed(false)
+				green_button.set_pressed(false)
+				purple_button.set_pressed(false)
+				# Checks for game over - i.e. all enemies have been killed
+				global.num_enemies_left = global.num_enemies_left - 1
+				if (global.num_enemies_left <= 0):
+					get_tree().change_scene("res://Scenes/GameOver.tscn")
+				# Resets the labels and deactivated the buttons until another ship is selected
+				question_display.changeMessage("NO TARGET SELECTED")
+				red_button_display.text = ""
+				blue_button_display.text = ""
+				green_button_display.text = ""
+				purple_button_display.text = ""
+				red_button.disabled = true
+				blue_button.disabled = true
+				green_button.disabled = true
+				purple_button.disabled = true
+				#Explosion animation
+				$AnimatedSprite.set_scale(Vector2(2, 2))
+				$AnimatedSprite.play("Explosion")
+				var soundNode = $"Sounds/ExplosionSound"
+				soundNode.play()
+				get_parent().remove_child(collide)
+				collide.queue_free()
+				yield(get_tree().create_timer(.3), "timeout")
+				# Deletes enemy
+				self.queue_free()
+			elif correct_answer_index != index_pressed and is_selected:
+				shielding_or_dying = true
+				$ShieldAnimation.show()
+				collide.reflect()
+				var soundNode = $"Sounds/ShieldSound"
+				soundNode.play()
+				#get_parent().remove_child(collide)
+				#collide.queue_free()
+				yield(get_tree().create_timer(.3), "timeout")
+				$ShieldAnimation.hide()
+				shielding_or_dying = false
 
 func _on_Area2D_input_event(viewport, event, shape_idx):
 	if Input.is_action_pressed("Click"):

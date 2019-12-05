@@ -44,7 +44,7 @@ func _on_Button_pressed():
 		set_dict[defStr] = wordStr
 	
 	# Save set to whole file under title
-	if(count > 4):
+	if(count >= 4):
 		save_dict[title] = set_dict
 		print(set_dict)
 
